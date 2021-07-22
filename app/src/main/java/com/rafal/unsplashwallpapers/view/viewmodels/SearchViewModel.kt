@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.rafal.unsplashwallpapers.model.UnsplashCollectionsResults
-import com.rafal.unsplashwallpapers.model.UnsplashPhotoResults
+import com.rafal.unsplashwallpapers.model.UnsplashPhoto
 import com.rafal.unsplashwallpapers.model.UnsplashUserResults
 import com.rafal.unsplashwallpapers.repository.SearchRepository
 import com.rafal.unsplashwallpapers.util.Resource
@@ -19,14 +21,15 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val searchRepository: SearchRepository
 ) : ViewModel() {
-    private val _photoLiveData: MutableLiveData<UnsplashPhotoResults> = MutableLiveData()
-    private val photoLiveData: LiveData<UnsplashPhotoResults> = _photoLiveData
+    private val _photoLiveData: MutableLiveData<PagingData<UnsplashPhoto>> = MutableLiveData()
+    private val photoLiveData: LiveData<PagingData<UnsplashPhoto>> = _photoLiveData
 
     private val _userLiveData: MutableLiveData<UnsplashUserResults> = MutableLiveData()
     private val userLiveData: LiveData<UnsplashUserResults> = _userLiveData
 
     private val _collectionsLiveData: MutableLiveData<UnsplashCollectionsResults> = MutableLiveData()
     private val collectionsLiveData: LiveData<UnsplashCollectionsResults> = _collectionsLiveData
+
 
     fun getPhotoLiveData() = photoLiveData
     fun getUserLiveData() = userLiveData
@@ -39,6 +42,10 @@ class SearchViewModel @Inject constructor(
                 is Resource.Fail -> Log.d("API", "${searchResults.message}")
             }
         }
+    }
+
+    fun searchPhotosPaging(query: String): LiveData<PagingData<UnsplashPhoto>> {
+        return searchRepository.searchPhotosPaging(query).cachedIn(viewModelScope)
     }
 
     fun searchUsers(query: String) {
