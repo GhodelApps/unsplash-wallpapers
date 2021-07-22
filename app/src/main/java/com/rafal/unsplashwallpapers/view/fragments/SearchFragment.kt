@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.rafal.unsplashwallpapers.R
 import com.rafal.unsplashwallpapers.databinding.FragmentSearchBinding
-import com.rafal.unsplashwallpapers.view.adapters.FragmentAdapter
+import com.rafal.unsplashwallpapers.view.adapters.SearchFragmentAdapter
 
 
 class SearchFragment : Fragment() {
@@ -27,7 +27,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.viewPager.adapter = FragmentAdapter(this)
+        binding.viewPager.adapter = SearchFragmentAdapter(this)
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = resources.getStringArray(R.array.main_tabs_titles)[position]

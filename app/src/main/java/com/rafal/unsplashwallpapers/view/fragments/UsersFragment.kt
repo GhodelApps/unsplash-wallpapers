@@ -1,12 +1,17 @@
 package com.rafal.unsplashwallpapers.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.rafal.unsplashwallpapers.databinding.FragmentUsersBinding
+import com.rafal.unsplashwallpapers.view.viewmodels.SearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UsersFragment : Fragment() {
 
     private var _binding: FragmentUsersBinding? = null
@@ -22,6 +27,14 @@ class UsersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val viewModel: SearchViewModel by viewModels()
+
+        viewModel.getUserLiveData().observe(viewLifecycleOwner) { result ->
+            Log.d("API", "Live data: ${result.results}")
+        }
+
+        viewModel.searchUsers("dog")
     }
 
     override fun onDestroy() {
