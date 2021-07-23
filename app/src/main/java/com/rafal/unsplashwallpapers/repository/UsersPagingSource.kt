@@ -11,7 +11,8 @@ import java.io.IOException
 class UsersPagingSource(
     private val api: UnsplashApi,
     private val query: String
-): PagingSource<Int, UnsplashUser>() {
+) : PagingSource<Int, UnsplashUser>() {
+
     override fun getRefreshKey(state: PagingState<Int, UnsplashUser>): Int? {
         return state.anchorPosition
     }
@@ -24,8 +25,8 @@ class UsersPagingSource(
             val results = response.body()!!.results
             LoadResult.Page(
                 data = results,
-                prevKey = if(position == 1) null else position -1,
-                nextKey = if(results.isEmpty()) null else position +1
+                prevKey = if (position == 1) null else position - 1,
+                nextKey = if (results.isEmpty()) null else position + 1
             )
         } catch (exception: IOException) {
             return LoadResult.Error(exception)

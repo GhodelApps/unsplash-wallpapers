@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.rafal.unsplashwallpapers.databinding.UserViewBinding
 import com.rafal.unsplashwallpapers.model.UnsplashUser
 
-class UsersPagingAdapter:
+class UsersPagingAdapter :
     PagingDataAdapter<UnsplashUser, UsersPagingAdapter.UsersViewHolder>(User_Comparator) {
 
     class UsersViewHolder(private val binding: UserViewBinding) :

@@ -26,7 +26,8 @@ class SearchViewModel @Inject constructor(
     private val _userLiveData: MutableLiveData<PagingData<UnsplashUser>> = MutableLiveData()
     val userLiveData: LiveData<PagingData<UnsplashUser>> = _userLiveData
 
-    private val _collectionLiveData: MutableLiveData<PagingData<UnsplashCollection>> = MutableLiveData()
+    private val _collectionLiveData: MutableLiveData<PagingData<UnsplashCollection>> =
+        MutableLiveData()
     val collectionLiveData: LiveData<PagingData<UnsplashCollection>> = _collectionLiveData
 
     fun searchPhotos(query: String) {

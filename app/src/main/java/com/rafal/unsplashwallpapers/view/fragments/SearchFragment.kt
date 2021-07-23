@@ -45,7 +45,7 @@ class SearchFragment : Fragment() {
     private fun setSearchViewOnQueryTextListener() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if(query != null && query.isNotEmpty()) {
+                if (query != null && query.isNotEmpty()) {
                     viewModel.searchPhotos(query)
                     viewModel.searchUsers(query)
                 }

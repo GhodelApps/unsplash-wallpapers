@@ -11,7 +11,7 @@ import com.rafal.unsplashwallpapers.databinding.LoadStateFooterViewItemBinding
 class ResultsLoadStateViewHolder(
     private val binding: LoadStateFooterViewItemBinding,
     retry: () -> Unit
-): RecyclerView.ViewHolder(binding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
     init {
         binding.retryButton.setOnClickListener { retry.invoke() }
     }

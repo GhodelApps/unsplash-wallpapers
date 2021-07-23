@@ -9,17 +9,17 @@ interface UnsplashApi {
     fun searchPhotos(
         @Query("query") query: String,
         @Query("page") page: Int
-    ) : Call<UnsplashPhotoResults>
+    ): Call<UnsplashPhotoResults>
 
     @GET("search/users")
     fun searchUsers(
         @Query("query") query: String,
         @Query("page") page: Int
-    ) : Call<UnsplashUserResults>
+    ): Call<UnsplashUserResults>
 
     @GET("search/collections")
     fun searchCollections(
         @Query("query") query: String,
         @Query("page") page: Int
-    ) : Call<UnsplashCollectionsResults>
+    ): Call<UnsplashCollectionsResults>
 }

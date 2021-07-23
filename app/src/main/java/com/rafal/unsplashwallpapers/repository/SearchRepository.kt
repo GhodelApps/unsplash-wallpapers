@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class SearchRepository @Inject constructor(
     private val api: UnsplashApi
-){
+) {
 
     fun searchPhotos(query: String): Flow<PagingData<UnsplashPhoto>> {
         return Pager(
