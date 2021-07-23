@@ -1,19 +1,17 @@
 package com.rafal.unsplashwallpapers.view.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.rafal.unsplashwallpapers.model.UnsplashCollectionsResults
+import com.rafal.unsplashwallpapers.model.UnsplashCollection
 import com.rafal.unsplashwallpapers.model.UnsplashPhoto
-import com.rafal.unsplashwallpapers.model.UnsplashUserResults
+import com.rafal.unsplashwallpapers.model.UnsplashUser
 import com.rafal.unsplashwallpapers.repository.SearchRepository
-import com.rafal.unsplashwallpapers.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,47 +19,28 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val searchRepository: SearchRepository
 ) : ViewModel() {
+
     private val _photoLiveData: MutableLiveData<PagingData<UnsplashPhoto>> = MutableLiveData()
-    private val photoLiveData: LiveData<PagingData<UnsplashPhoto>> = _photoLiveData
+    val photoLiveData: LiveData<PagingData<UnsplashPhoto>> = _photoLiveData
 
-    private val _userLiveData: MutableLiveData<UnsplashUserResults> = MutableLiveData()
-    private val userLiveData: LiveData<UnsplashUserResults> = _userLiveData
+    private val _userLiveData: MutableLiveData<PagingData<UnsplashUser>> = MutableLiveData()
+    val userLiveData: LiveData<PagingData<UnsplashUser>> = _userLiveData
 
-    private val _collectionsLiveData: MutableLiveData<UnsplashCollectionsResults> = MutableLiveData()
-    private val collectionsLiveData: LiveData<UnsplashCollectionsResults> = _collectionsLiveData
-
-
-    fun getPhotoLiveData() = photoLiveData
-    fun getUserLiveData() = userLiveData
-    fun getCollectionsLiveData() = collectionsLiveData
+    private val _collectionLiveData: MutableLiveData<PagingData<UnsplashCollection>> = MutableLiveData()
+    val collectionLiveData: LiveData<PagingData<UnsplashCollection>> = _collectionLiveData
 
     fun searchPhotos(query: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            when(val searchResults = searchRepository.searchPhotos(query)) {
-                is Resource.Success -> Log.d("API", "${searchResults.data!!.results}")
-                is Resource.Fail -> Log.d("API", "${searchResults.message}")
+        viewModelScope.launch {
+            searchRepository.searchPhotos(query).cachedIn(viewModelScope).collect {
+                _photoLiveData.value = it
             }
         }
-    }
-
-    fun searchPhotosPaging(query: String): LiveData<PagingData<UnsplashPhoto>> {
-        return searchRepository.searchPhotosPaging(query).cachedIn(viewModelScope)
     }
 
     fun searchUsers(query: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            when(val searchResults = searchRepository.searchUsers(query)) {
-                is Resource.Success -> Log.d("API", "${searchResults.data!!.results}")
-                is Resource.Fail -> Log.d("API", "${searchResults.message}")
-            }
-        }
-    }
-
-    fun searchCollections(query: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            when(val searchResults = searchRepository.searchCollections(query)) {
-                is Resource.Success -> Log.d("API", "${searchResults.data!!.results}")
-                is Resource.Fail -> Log.d("API", "${searchResults.message}")
+        viewModelScope.launch {
+            searchRepository.searchUsers(query).cachedIn(viewModelScope).collect {
+                _userLiveData.value = it
             }
         }
     }

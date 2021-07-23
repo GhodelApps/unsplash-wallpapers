@@ -8,7 +8,7 @@ import retrofit2.HttpException
 import retrofit2.awaitResponse
 import java.io.IOException
 
-class UnsplashPhotoPagingSource(
+class PhotosPagingSource(
     private val api: UnsplashApi,
     private val query: String
     ): PagingSource<Int, UnsplashPhoto>() {
@@ -32,6 +32,9 @@ class UnsplashPhotoPagingSource(
             return LoadResult.Error(exception)
         } catch (exception: HttpException) {
             return LoadResult.Error(exception)
+        } catch (exception: NullPointerException) {
+            return LoadResult.Error(exception)
         }
+
     }
 }

@@ -7,10 +7,12 @@
     tools:context=".view.fragments.SearchFragment">
 
     <SearchView
+        android:id="@+id/search_view"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:queryHint="Search"
+        android:queryBackground="@android:color/transparent"
         android:iconifiedByDefault="false"
         android:background="@drawable/search_view_background"
         />

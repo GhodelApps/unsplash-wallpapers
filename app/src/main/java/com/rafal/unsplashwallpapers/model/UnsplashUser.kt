@@ -1,6 +1,7 @@
 package com.rafal.unsplashwallpapers.model
 
 data class UnsplashUser(
+    val id: String,
     val name: String,
     val profile_image: ProfileImage
 ) {

@@ -1,7 +1,6 @@
 package com.rafal.unsplashwallpapers.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,11 +34,7 @@ class CollectionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getCollectionsLiveData().observe(viewLifecycleOwner) { result ->
-            Log.d("API", "Live data: ${result.results}")
-        }
 
-        viewModel.searchCollections("usa")
     }
 
     override fun onDestroy() {

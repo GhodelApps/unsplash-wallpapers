@@ -1,13 +1,14 @@
 package com.rafal.unsplashwallpapers.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.rafal.unsplashwallpapers.databinding.FragmentUsersBinding
+import com.rafal.unsplashwallpapers.view.adapters.ResultsLoadStateAdapter
+import com.rafal.unsplashwallpapers.view.adapters.UsersPagingAdapter
 import com.rafal.unsplashwallpapers.view.viewmodels.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,13 +29,19 @@ class UsersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel: SearchViewModel by viewModels()
+        val viewModel: SearchViewModel by activityViewModels()
 
-        viewModel.getUserLiveData().observe(viewLifecycleOwner) { result ->
-            Log.d("API", "Live data: ${result.results}")
+        val pagingAdapter = UsersPagingAdapter()
+        val recyclerView = binding.usersRv
+        recyclerView.adapter = pagingAdapter.withLoadStateHeaderAndFooter(
+            header = ResultsLoadStateAdapter { pagingAdapter.retry() },
+            footer = ResultsLoadStateAdapter { pagingAdapter.retry() }
+        )
+
+        viewModel.userLiveData.observe(viewLifecycleOwner) {
+            pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
-        viewModel.searchUsers("dog")
     }
 
     override fun onDestroy() {

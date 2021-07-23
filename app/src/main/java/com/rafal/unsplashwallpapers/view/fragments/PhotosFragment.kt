@@ -5,21 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.activityViewModels
 import com.rafal.unsplashwallpapers.databinding.FragmentPhotosBinding
-import com.rafal.unsplashwallpapers.view.adapters.PhotosAdapter
+import com.rafal.unsplashwallpapers.view.adapters.PhotosPagingAdapter
+import com.rafal.unsplashwallpapers.view.adapters.ResultsLoadStateAdapter
 import com.rafal.unsplashwallpapers.view.viewmodels.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.Job
 
 @AndroidEntryPoint
 class PhotosFragment : Fragment() {
 
     private var _binding: FragmentPhotosBinding? = null
     private val binding get() = _binding!!
+    private var searchJob: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,19 +31,17 @@ class PhotosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel: SearchViewModel by viewModels()
+        val viewModel: SearchViewModel by activityViewModels()
 
-        val pagingAdapter = PhotosAdapter()
+        val pagingAdapter = PhotosPagingAdapter()
         val recyclerView = binding.photosRv
-        recyclerView.adapter = pagingAdapter
+        recyclerView.adapter = pagingAdapter.withLoadStateHeaderAndFooter(
+            header = ResultsLoadStateAdapter { pagingAdapter.retry() },
+            footer = ResultsLoadStateAdapter { pagingAdapter.retry() }
+        )
 
-        viewModel.searchPhotosPaging("car").observe(viewLifecycleOwner) {
-            pagingAdapter.submitData(viewLifecycleOwner.lifecycle,  it)
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-            delay(5000)
-            viewModel.searchPhotosPaging("ball")
+        viewModel.photoLiveData.observe(viewLifecycleOwner) {
+            pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
     }
 

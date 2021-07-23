@@ -6,11 +6,12 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.rafal.unsplashwallpapers.databinding.PhotoViewBinding
 import com.rafal.unsplashwallpapers.model.UnsplashPhoto
 
-class PhotosAdapter :
-    PagingDataAdapter<UnsplashPhoto, PhotosAdapter.PhotosViewHolder>(Photo_Comparator) {
+class PhotosPagingAdapter :
+    PagingDataAdapter<UnsplashPhoto, PhotosPagingAdapter.PhotosViewHolder>(Photo_Comparator) {
 
     class PhotosViewHolder(private val binding: PhotoViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -18,7 +19,10 @@ class PhotosAdapter :
             Glide.with(itemView)
                 .load(photo.urls.small)
                 .centerCrop()
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(binding.photoIv)
+
+            binding.photoUsername.text = photo.user.name
         }
     }
 
