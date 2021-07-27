@@ -40,6 +40,10 @@ class PhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
             footer = ResultsLoadStateAdapter { pagingAdapter.retry() }
         )
 
+        binding.fabPhotos.setOnClickListener {
+            recyclerView.scrollToPosition(0)
+        }
+
         viewModel.photoLiveData.observe(viewLifecycleOwner) {
             binding.photosEmptyIv.visibility = View.GONE
             pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)

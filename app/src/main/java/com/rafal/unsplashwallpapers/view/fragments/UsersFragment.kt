@@ -38,6 +38,10 @@ class UsersFragment : Fragment() {
             footer = ResultsLoadStateAdapter { pagingAdapter.retry() }
         )
 
+        binding.fabUsers.setOnClickListener {
+            recyclerView.scrollToPosition(0)
+        }
+
         viewModel.userLiveData.observe(viewLifecycleOwner) {
             binding.usersEmptyIv.visibility = View.GONE
             pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
