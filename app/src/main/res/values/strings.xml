@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UnsplashWallpapers</string>
+    <string name="app_name">Unsplash</string>
     <string-array name="main_tabs_titles">
         <item>Photos</item>
         <item>Collections</item>
@@ -7,4 +7,7 @@
     </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="retry">Retry</string>
+    <string name="search">Search</string>
+    <string name="relevance">Relevant</string>
+    <string name="latest">Latest</string>
 </resources>

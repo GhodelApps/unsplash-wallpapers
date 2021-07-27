@@ -8,7 +8,8 @@ interface UnsplashApi {
     @GET("search/photos")
     fun searchPhotos(
         @Query("query") query: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("order_by") orderBy: String
     ): Call<UnsplashPhotoResults>
 
     @GET("search/users")

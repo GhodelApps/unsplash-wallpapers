@@ -30,9 +30,9 @@ class SearchViewModel @Inject constructor(
         MutableLiveData()
     val collectionLiveData: LiveData<PagingData<UnsplashCollection>> = _collectionLiveData
 
-    fun searchPhotos(query: String) {
+    fun searchPhotos(query: String, sortBy: String) {
         viewModelScope.launch {
-            searchRepository.searchPhotos(query).cachedIn(viewModelScope).collect {
+            searchRepository.searchPhotos(query, sortBy).cachedIn(viewModelScope).collect {
                 _photoLiveData.value = it
             }
         }

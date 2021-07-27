@@ -39,6 +39,7 @@ class UsersFragment : Fragment() {
         )
 
         viewModel.userLiveData.observe(viewLifecycleOwner) {
+            recyclerView.scrollToPosition(0)
             pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 

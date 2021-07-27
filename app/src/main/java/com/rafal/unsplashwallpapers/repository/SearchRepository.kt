@@ -13,7 +13,7 @@ class SearchRepository @Inject constructor(
     private val api: UnsplashApi
 ) {
 
-    fun searchPhotos(query: String): Flow<PagingData<UnsplashPhoto>> {
+    fun searchPhotos(query: String, orderBy: String): Flow<PagingData<UnsplashPhoto>> {
         return Pager(
             PagingConfig(
                 enablePlaceholders = false,
@@ -21,7 +21,7 @@ class SearchRepository @Inject constructor(
                 maxSize = 100
             )
         ) {
-            PhotosPagingSource(api, query)
+            PhotosPagingSource(api, query, orderBy)
         }.flow
     }
 

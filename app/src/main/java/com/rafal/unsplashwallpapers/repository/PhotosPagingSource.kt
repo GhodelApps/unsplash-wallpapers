@@ -10,8 +10,9 @@ import java.io.IOException
 
 class PhotosPagingSource(
     private val api: UnsplashApi,
-    private val query: String
-    ): PagingSource<Int, UnsplashPhoto>() {
+    private val query: String,
+    private val sortBy: String
+) : PagingSource<Int, UnsplashPhoto>() {
 
     override fun getRefreshKey(state: PagingState<Int, UnsplashPhoto>): Int? {
         return state.anchorPosition
@@ -21,12 +22,12 @@ class PhotosPagingSource(
         val position = params.key ?: 1
 
         return try {
-            val response = api.searchPhotos(query, position).awaitResponse()
+            val response = api.searchPhotos(query, position, sortBy).awaitResponse()
             val results = response.body()!!.results
             LoadResult.Page(
                 data = results,
-                prevKey = if(position == 1) null else position - 1,
-                nextKey = if(results.isEmpty()) null else position + 1
+                prevKey = if (position == 1) null else position - 1,
+                nextKey = if (results.isEmpty()) null else position + 1
             )
         } catch (exception: IOException) {
             return LoadResult.Error(exception)

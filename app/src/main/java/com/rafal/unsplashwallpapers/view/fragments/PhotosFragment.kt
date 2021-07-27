@@ -11,14 +11,12 @@ import com.rafal.unsplashwallpapers.view.adapters.PhotosPagingAdapter
 import com.rafal.unsplashwallpapers.view.adapters.ResultsLoadStateAdapter
 import com.rafal.unsplashwallpapers.view.viewmodels.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 
 @AndroidEntryPoint
 class PhotosFragment : Fragment() {
 
     private var _binding: FragmentPhotosBinding? = null
     private val binding get() = _binding!!
-    private var searchJob: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +39,7 @@ class PhotosFragment : Fragment() {
         )
 
         viewModel.photoLiveData.observe(viewLifecycleOwner) {
+            recyclerView.scrollToPosition(0)
             pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
     }
