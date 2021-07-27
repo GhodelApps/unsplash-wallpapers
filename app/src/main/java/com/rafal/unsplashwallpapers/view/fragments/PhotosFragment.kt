@@ -39,6 +39,7 @@ class PhotosFragment : Fragment() {
         )
 
         viewModel.photoLiveData.observe(viewLifecycleOwner) {
+            binding.photosEmptyIv.visibility = View.GONE
             recyclerView.scrollToPosition(0)
             pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
