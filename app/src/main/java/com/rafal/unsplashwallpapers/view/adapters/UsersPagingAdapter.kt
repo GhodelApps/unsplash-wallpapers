@@ -24,7 +24,7 @@ class UsersPagingAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(user: UnsplashUser) {
             Glide.with(itemView)
-                .load(user.profile_image.medium)
+                .load(user.profile_image.large)
                 .centerCrop()
                 .error(R.drawable.ic_baseline_error_24)
                 .listener(object : RequestListener<Drawable> {

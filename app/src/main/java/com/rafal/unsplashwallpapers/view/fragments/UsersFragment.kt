@@ -40,7 +40,6 @@ class UsersFragment : Fragment() {
 
         viewModel.userLiveData.observe(viewLifecycleOwner) {
             binding.usersEmptyIv.visibility = View.GONE
-            recyclerView.scrollToPosition(0)
             pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 

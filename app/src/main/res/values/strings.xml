@@ -10,4 +10,6 @@
     <string name="search">Search</string>
     <string name="relevance">Relevant</string>
     <string name="latest">Latest</string>
+    <string name="camera">Camera</string>
+    <string name="aperture">Aperture</string>
 </resources>

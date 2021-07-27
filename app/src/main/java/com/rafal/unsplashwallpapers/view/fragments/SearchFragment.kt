@@ -22,7 +22,7 @@ class SearchFragment : Fragment() {
 
     private val viewModel: SearchViewModel by activityViewModels()
 
-    private lateinit var latestSearchQuery: String
+    private var latestSearchQuery = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +56,7 @@ class SearchFragment : Fragment() {
                     latestSearchQuery = query
                     viewModel.searchPhotos(query, SORT_BY_RELEVANT)
                     viewModel.searchUsers(query)
+                    return true
                 }
                 return false
             }
@@ -71,7 +72,7 @@ class SearchFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.action_sort -> {
                 showSortPopUp(requireActivity().findViewById(R.id.action_sort))
                 true
@@ -90,11 +91,16 @@ class SearchFragment : Fragment() {
             setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.popup_sort_relevance -> {
-                        viewModel.searchPhotos(latestSearchQuery, SORT_BY_RELEVANT)
+                        if (latestSearchQuery.isNotEmpty()) {
+                            viewModel.searchPhotos(latestSearchQuery, SORT_BY_RELEVANT)
+                        }
+
                         true
                     }
                     R.id.popup_sort_latest -> {
-                        viewModel.searchPhotos(latestSearchQuery, SORT_BY_LATEST)
+                        if (latestSearchQuery.isNotEmpty()) {
+                            viewModel.searchPhotos(latestSearchQuery, SORT_BY_LATEST)
+                        }
                         true
                     }
                     else -> false
