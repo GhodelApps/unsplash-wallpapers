@@ -1,75 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.fragments.PhotoDetailsFragment">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/photo_details_iv"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:minHeight="100dp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical">
 
-    <ProgressBar
-        android:id="@+id/photo_details_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/photo_details_iv"
-        app:layout_constraintEnd_toEndOf="@+id/photo_details_iv"
-        app:layout_constraintStart_toStartOf="@+id/photo_details_iv"
-        app:layout_constraintTop_toTopOf="@+id/photo_details_iv" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/photo_details_iv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:minHeight="100dp"
+                android:scaleType="fitXY" />
+
+            <ProgressBar
+                android:id="@+id/photo_details_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/photo_details_user_iv"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_baseline_person_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/photo_details_user_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Username"
+                app:layout_constraintBottom_toBottomOf="@+id/photo_details_user_iv"
+                app:layout_constraintStart_toEndOf="@+id/photo_details_user_iv"
+                app:layout_constraintTop_toTopOf="@+id/photo_details_user_iv" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="46dp" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+            <TextView
+                android:id="@+id/photo_details_camera_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/camera"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/photo_details_camera_model_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/camera_model"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/photo_details_camera_title"
+                app:layout_constraintStart_toEndOf="@+id/photo_details_camera_title"
+                app:layout_constraintTop_toTopOf="@+id/photo_details_camera_title"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/photo_details_camera"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="@+id/photo_details_camera_title"
+                app:layout_constraintTop_toBottomOf="@+id/photo_details_camera_title"
+                app:layout_constraintWidth_percent="0.5"
+                tools:text="Canon" />
+
+            <TextView
+                android:id="@+id/photo_details_camera_model"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toEndOf="@+id/photo_details_camera_title"
+                app:layout_constraintTop_toBottomOf="@+id/photo_details_camera_model_title"
+                app:layout_constraintWidth_percent="0.5"
+                tools:text="Canon EOS 40D" />
+
+            <TextView
+                android:id="@+id/photo_details_focal_length_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/focal_length"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/photo_details_camera"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/photo_details_aperture_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/shutter_speed"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/photo_details_focal_length_title"
+                app:layout_constraintStart_toEndOf="@+id/photo_details_focal_length_title"
+                app:layout_constraintTop_toTopOf="@+id/photo_details_focal_length_title"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/photo_details_focal_length"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="@+id/photo_details_focal_length_title"
+                app:layout_constraintTop_toBottomOf="@+id/photo_details_focal_length_title"
+                app:layout_constraintWidth_percent="0.5"
+                tools:text="37" />
+
+            <TextView
+                android:id="@+id/photo_details_aperture"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/photo_details_focal_length"
+                app:layout_constraintStart_toEndOf="@+id/photo_details_focal_length"
+                app:layout_constraintTop_toTopOf="@+id/photo_details_focal_length"
+                app:layout_constraintWidth_percent="0.5"
+                tools:text="4.970854" />
+
+            <TextView
+                android:id="@+id/photo_details_iso_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/iso"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/photo_details_focal_length"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/photo_details_dimensions_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/dimensions"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/photo_details_iso_title"
+                app:layout_constraintStart_toEndOf="@+id/photo_details_iso_title"
+                app:layout_constraintTop_toTopOf="@+id/photo_details_iso_title"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/photo_details_iso"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="@+id/photo_details_iso_title"
+                app:layout_constraintTop_toBottomOf="@+id/photo_details_iso_title"
+                app:layout_constraintWidth_percent="0.5"
+                tools:text="100" />
+
+            <TextView
+                android:id="@+id/photo_details_dimensions"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/photo_details_iso"
+                app:layout_constraintStart_toEndOf="@+id/photo_details_iso"
+                app:layout_constraintTop_toBottomOf="@+id/photo_details_iso_title"
+                app:layout_constraintWidth_percent="0.5"
+                tools:text="1920x1080" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/photo_details_iso" />
+
+            <TextView
+                android:id="@+id/photo_details_downloads_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/downloads"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider2"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/photo_details_likes_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/likes"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toEndOf="@id/photo_details_downloads_title"
+                app:layout_constraintTop_toBottomOf="@+id/divider2"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/photo_details_downloads"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/photo_details_downloads_title"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/photo_details_likes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="124"
+                app:layout_constraintBottom_toBottomOf="@+id/photo_details_downloads"
+                app:layout_constraintStart_toStartOf="@id/photo_details_likes_title"
+                app:layout_constraintTop_toTopOf="@id/photo_details_downloads"
+                app:layout_constraintWidth_percent="0.5" />
 
 
-    <ImageView
-        android:id="@+id/photo_details_user_iv"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_baseline_person_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photo_details_iv" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/photo_details_user_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Username"
-        app:layout_constraintBottom_toBottomOf="@+id/photo_details_user_iv"
-        app:layout_constraintStart_toEndOf="@+id/photo_details_user_iv"
-        app:layout_constraintTop_toTopOf="@+id/photo_details_user_iv" />
-
-<!--    <TableLayout-->
-<!--        android:id="@+id/photo_details_table_layout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:stretchColumns="1"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/photo_details_user_iv">-->
-
-<!--        <TableRow>-->
-
-<!--            <TextView-->
-<!--                android:layout_column="1"-->
-<!--                android:id="@+id/photo_details_camera"-->
-<!--                android:text="@string/camera" />-->
-
-<!--            <TextView-->
-<!--                android:layout_column="2"-->
-<!--                android:id="@+id/photo_details_aperture"-->
-<!--                android:gravity="left"-->
-<!--                android:text="@string/aperture" />-->
-<!--        </TableRow>-->
-<!--    </TableLayout>-->
+    </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

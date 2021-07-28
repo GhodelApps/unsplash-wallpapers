@@ -10,6 +10,13 @@
     <string name="search">Search</string>
     <string name="relevance">Relevant</string>
     <string name="latest">Latest</string>
-    <string name="camera">Camera</string>
+    <string name="camera">Camera Make</string>
+    <string name="camera_model">Camera Model</string>
     <string name="aperture">Aperture</string>
+    <string name="focal_length">Focal Length</string>
+    <string name="shutter_speed">Aperture</string>
+    <string name="iso">ISO</string>
+    <string name="dimensions">Dimensions</string>
+    <string name="downloads">Downloads</string>
+    <string name="likes">Likes</string>
 </resources>

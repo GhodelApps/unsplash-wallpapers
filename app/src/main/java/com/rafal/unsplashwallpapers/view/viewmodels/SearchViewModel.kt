@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.rafal.unsplashwallpapers.model.UnsplashCollection
-import com.rafal.unsplashwallpapers.model.UnsplashPhoto
+import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
 import com.rafal.unsplashwallpapers.model.UnsplashUser
 import com.rafal.unsplashwallpapers.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,8 +20,8 @@ class SearchViewModel @Inject constructor(
     private val searchRepository: SearchRepository
 ) : ViewModel() {
 
-    private val _photoLiveData: MutableLiveData<PagingData<UnsplashPhoto>> = MutableLiveData()
-    val photoLiveData: LiveData<PagingData<UnsplashPhoto>> = _photoLiveData
+    private val _photoLiveData: MutableLiveData<PagingData<UnsplashSearchPhoto>> = MutableLiveData()
+    val photoLiveData: LiveData<PagingData<UnsplashSearchPhoto>> = _photoLiveData
 
     private val _userLiveData: MutableLiveData<PagingData<UnsplashUser>> = MutableLiveData()
     val userLiveData: LiveData<PagingData<UnsplashUser>> = _userLiveData

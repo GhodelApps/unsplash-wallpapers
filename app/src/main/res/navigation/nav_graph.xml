@@ -37,8 +37,8 @@
         android:label="Details"
         tools:layout="@layout/fragment_photo_details" >
         <argument
-            android:name="unsplashPhoto"
-            app:argType="com.rafal.unsplashwallpapers.model.UnsplashPhoto" />
+            android:name="photoID"
+            app:argType="string" />
     </fragment>
 
 </navigation>

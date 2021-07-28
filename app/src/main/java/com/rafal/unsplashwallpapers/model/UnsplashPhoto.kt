@@ -1,22 +1,20 @@
 package com.rafal.unsplashwallpapers.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
 data class UnsplashPhoto(
     val id: String,
-    val description: String?,
-    val urls: Urls,
+    val width: Int,
+    val height: Int,
+    val downloads: Int,
     val likes: Int,
-    val user: UnsplashUser
-) : Parcelable {
-    @Parcelize
-    data class Urls(
-        val raw: String,
-        val full: String,
-        val regular: String,
-        val small: String,
-        val thumb: String
-    ) : Parcelable
+    val user: UnsplashUser,
+    val exif: UnsplashPhotoExif
+
+) {
+    data class UnsplashPhotoExif(
+        val make: String,
+        val model: String,
+        val aperture: String,
+        val focal_length: String,
+        val iso: Int
+    )
 }

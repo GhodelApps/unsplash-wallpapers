@@ -37,9 +37,9 @@ class PhotoDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.photoDetailsUserTv.text = args.unsplashPhoto.user.name
-        loadImage(args.unsplashPhoto.urls.full)
-        loadUserImage(args.unsplashPhoto.user.profile_image.medium)
+        binding.photoDetailsUserTv.text = args.photoID
+//        loadImage(args.unsplashPhoto.urls.full)
+//        loadUserImage(args.unsplashPhoto.user.profile_image.medium)
     }
 
     private fun loadImage(url: String) {

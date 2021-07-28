@@ -3,7 +3,7 @@ package com.rafal.unsplashwallpapers.repository
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.rafal.unsplashwallpapers.model.UnsplashApi
-import com.rafal.unsplashwallpapers.model.UnsplashPhoto
+import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
 import retrofit2.HttpException
 import retrofit2.awaitResponse
 import java.io.IOException
@@ -12,13 +12,13 @@ class PhotosPagingSource(
     private val api: UnsplashApi,
     private val query: String,
     private val sortBy: String
-) : PagingSource<Int, UnsplashPhoto>() {
+) : PagingSource<Int, UnsplashSearchPhoto>() {
 
-    override fun getRefreshKey(state: PagingState<Int, UnsplashPhoto>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, UnsplashSearchPhoto>): Int? {
         return state.anchorPosition
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UnsplashPhoto> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UnsplashSearchPhoto> {
         val position = params.key ?: 1
 
         return try {

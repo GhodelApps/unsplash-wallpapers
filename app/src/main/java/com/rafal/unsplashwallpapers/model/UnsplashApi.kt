@@ -10,7 +10,7 @@ interface UnsplashApi {
         @Query("query") query: String,
         @Query("page") page: Int,
         @Query("order_by") orderBy: String
-    ): Call<UnsplashPhotoResults>
+    ): Call<UnsplashSearchPhotoResults>
 
     @GET("search/users")
     fun searchUsers(
@@ -23,4 +23,9 @@ interface UnsplashApi {
         @Query("query") query: String,
         @Query("page") page: Int
     ): Call<UnsplashCollectionsResults>
+
+    @GET("/photos/:id")
+    fun getPhoto(
+        @Query("id") id: String
+    ) : Call<UnsplashPhoto>
 }

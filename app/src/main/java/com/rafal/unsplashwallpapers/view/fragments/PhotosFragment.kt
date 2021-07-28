@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.rafal.unsplashwallpapers.databinding.FragmentPhotosBinding
-import com.rafal.unsplashwallpapers.model.UnsplashPhoto
 import com.rafal.unsplashwallpapers.view.adapters.PhotosPagingAdapter
 import com.rafal.unsplashwallpapers.view.adapters.ResultsLoadStateAdapter
 import com.rafal.unsplashwallpapers.view.viewmodels.SearchViewModel
@@ -56,8 +55,8 @@ class PhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
         _binding = null
     }
 
-    override fun onPhotoClick(photo: UnsplashPhoto) {
-        val action = SearchFragmentDirections.actionSearchFragmentToPhotoDetailsFragment(photo)
+    override fun onPhotoClick(photoID: String) {
+        val action = SearchFragmentDirections.actionSearchFragmentToPhotoDetailsFragment(photoID = photoID)
         findNavController().navigate(action)
     }
 

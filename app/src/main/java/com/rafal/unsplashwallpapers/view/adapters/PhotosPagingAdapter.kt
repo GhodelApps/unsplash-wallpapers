@@ -17,15 +17,15 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.rafal.unsplashwallpapers.R
 import com.rafal.unsplashwallpapers.databinding.PhotoViewBinding
-import com.rafal.unsplashwallpapers.model.UnsplashPhoto
+import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
 
 class PhotosPagingAdapter(private val listener: onPhotoClickListener) :
-    PagingDataAdapter<UnsplashPhoto, PhotosPagingAdapter.PhotosViewHolder>(Photo_Comparator) {
+    PagingDataAdapter<UnsplashSearchPhoto, PhotosPagingAdapter.PhotosViewHolder>(Photo_Comparator) {
 
     inner class PhotosViewHolder(private val binding: PhotoViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(photo: UnsplashPhoto) {
+        fun bind(photo: UnsplashSearchPhoto) {
             binding.photoPb.visibility = View.VISIBLE
             Glide.with(itemView)
                 .load(photo.urls.regular)
@@ -61,7 +61,7 @@ class PhotosPagingAdapter(private val listener: onPhotoClickListener) :
 
             binding.photoUsername.text = photo.user.name
             binding.photoIv.setOnClickListener {
-                listener.onPhotoClick(photo)
+                listener.onPhotoClick(photo.id)
             }
         }
     }
@@ -82,18 +82,18 @@ class PhotosPagingAdapter(private val listener: onPhotoClickListener) :
     }
 
     interface onPhotoClickListener {
-        fun onPhotoClick(photo: UnsplashPhoto)
+        fun onPhotoClick(photoID: String)
     }
 
     companion object {
-        private val Photo_Comparator = object : DiffUtil.ItemCallback<UnsplashPhoto>() {
-            override fun areItemsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto): Boolean {
+        private val Photo_Comparator = object : DiffUtil.ItemCallback<UnsplashSearchPhoto>() {
+            override fun areItemsTheSame(oldItem: UnsplashSearchPhoto, newItem: UnsplashSearchPhoto): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: UnsplashPhoto,
-                newItem: UnsplashPhoto
+                oldItem: UnsplashSearchPhoto,
+                newItem: UnsplashSearchPhoto
             ): Boolean {
                 return oldItem == newItem
             }
