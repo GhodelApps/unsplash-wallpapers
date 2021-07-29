@@ -25,7 +25,7 @@ class UsersPagingAdapter :
         fun bind(user: UnsplashUser) {
             Glide.with(itemView)
                 .load(user.profile_image.large)
-                .centerCrop()
+                .circleCrop()
                 .error(R.drawable.ic_baseline_error_24)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
@@ -53,6 +53,7 @@ class UsersPagingAdapter :
                 .into(binding.userIv)
 
             binding.userName.text = user.name
+            binding.userUsername.text = "@${user.username}"
         }
     }
 

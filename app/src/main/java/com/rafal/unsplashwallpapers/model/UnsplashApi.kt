@@ -2,6 +2,7 @@ package com.rafal.unsplashwallpapers.model
 
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface UnsplashApi {
@@ -24,8 +25,8 @@ interface UnsplashApi {
         @Query("page") page: Int
     ): Call<UnsplashCollectionsResults>
 
-    @GET("/photos/:id")
+    @GET("photos/{id}")
     fun getPhoto(
-        @Query("id") id: String
+        @Path("id") id: String
     ) : Call<UnsplashPhoto>
 }

@@ -3,7 +3,7 @@ package com.rafal.unsplashwallpapers.view.fragments
 import android.os.Bundle
 import android.view.*
 import android.widget.PopupMenu
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayoutMediator
@@ -46,29 +46,15 @@ class SearchFragment : Fragment() {
             tab.text = resources.getStringArray(R.array.main_tabs_titles)[position]
         }.attach()
 
-        setSearchViewOnQueryTextListener()
-    }
-
-    private fun setSearchViewOnQueryTextListener() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null && query.isNotEmpty()) {
-                    latestSearchQuery = query
-                    viewModel.searchPhotos(query, SORT_BY_RELEVANT)
-                    viewModel.searchUsers(query)
-                    return true
-                }
-                return false
-            }
-
-            override fun onQueryTextChange(query: String?): Boolean {
-                return false
-            }
-        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.search_menu, menu)
+
+        val searchView = menu.findItem(R.id.action_search_search_fragment).actionView as SearchView
+        searchView.queryHint = getString(R.string.query_hint)
+
+        setSearchViewOnQueryTextListener(searchView)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -87,14 +73,13 @@ class SearchFragment : Fragment() {
     }
 
     private fun showSortPopUp(v: View) {
-        val popup = PopupMenu(activity, v).apply {
+        PopupMenu(activity, v).apply {
             setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.popup_sort_relevance -> {
                         if (latestSearchQuery.isNotEmpty()) {
                             viewModel.searchPhotos(latestSearchQuery, SORT_BY_RELEVANT)
                         }
-
                         true
                     }
                     R.id.popup_sort_latest -> {
@@ -109,6 +94,28 @@ class SearchFragment : Fragment() {
             inflate(R.menu.popup_menu_sort)
             show()
         }
+    }
+
+    private fun setSearchViewOnQueryTextListener(view: SearchView) {
+        view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (!query.isNullOrEmpty()) {
+                    search(query)
+                    return true
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                return true
+            }
+        })
+    }
+
+    private fun search(query: String) {
+        latestSearchQuery = query
+        viewModel.searchPhotos(query, SORT_BY_RELEVANT)
+        viewModel.searchUsers(query)
     }
 
     companion object {

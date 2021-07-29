@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
@@ -31,8 +32,12 @@ class PhotosPagingAdapter(private val listener: onPhotoClickListener) :
                 .load(photo.urls.regular)
                 .apply(
                     RequestOptions()
-                    .override(Target.SIZE_ORIGINAL)
-                    .format(DecodeFormat.PREFER_ARGB_8888))
+                        .override(Target.SIZE_ORIGINAL)
+                        .transform(
+                            RoundedCorners(50)
+                        )
+                        .format(DecodeFormat.PREFER_ARGB_8888)
+                )
                 .error(R.drawable.ic_baseline_error_24)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
@@ -87,7 +92,10 @@ class PhotosPagingAdapter(private val listener: onPhotoClickListener) :
 
     companion object {
         private val Photo_Comparator = object : DiffUtil.ItemCallback<UnsplashSearchPhoto>() {
-            override fun areItemsTheSame(oldItem: UnsplashSearchPhoto, newItem: UnsplashSearchPhoto): Boolean {
+            override fun areItemsTheSame(
+                oldItem: UnsplashSearchPhoto,
+                newItem: UnsplashSearchPhoto
+            ): Boolean {
                 return oldItem.id == newItem.id
             }
 

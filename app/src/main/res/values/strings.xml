@@ -19,4 +19,7 @@
     <string name="dimensions">Dimensions</string>
     <string name="downloads">Downloads</string>
     <string name="likes">Likes</string>
+    <string name="unknown">Unknown</string>
+    <string name="error_loading_photo_details">Error loading photo details</string>
+    <string name="query_hint">Search...</string>
 </resources>

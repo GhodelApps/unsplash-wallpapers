@@ -7,14 +7,15 @@ data class UnsplashPhoto(
     val downloads: Int,
     val likes: Int,
     val user: UnsplashUser,
-    val exif: UnsplashPhotoExif
+    val exif: UnsplashPhotoExif,
+    val urls: UnsplashPhotoUrls
 
 ) {
     data class UnsplashPhotoExif(
-        val make: String,
-        val model: String,
-        val aperture: String,
-        val focal_length: String,
-        val iso: Int
+        val make: String?,
+        val model: String?,
+        val aperture: String?,
+        val focal_length: String?,
+        val iso: Int?
     )
 }
