@@ -29,4 +29,15 @@ interface UnsplashApi {
     fun getPhoto(
         @Path("id") id: String
     ) : Call<UnsplashPhoto>
+
+    @GET("users/{username}")
+    fun getUser(
+        @Path("username") username: String
+    ) : Call<UnsplashUser>
+
+    @GET("/users/{username}/photos")
+    fun getUserPhotos(
+        @Path("username") username: String,
+        @Query("page") page: Int
+    ) : Call<List<UnsplashSearchPhoto>>
 }

@@ -28,4 +28,6 @@
     <string name="failed_to_set_wallpaper">Failed to set new wallpaper</string>
     <string name="wallpaper_successfully_set">Wallpaper changed successfully</string>
     <string name="set_as_wallpaper">Set as wallpaper</string>
+    <string name="photos">Photos</string>
+    <string name="error_loading_user_details">Error loading user details</string>
 </resources>

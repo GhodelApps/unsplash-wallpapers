@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:id="@+id/pb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp" />
+
+        <LinearLayout
+            android:id="@+id/fail_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:text="@string/error_loading_user_details"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/retry_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="@string/retry" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/success_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/user_iv"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/ic_baseline_person_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/user_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/user_iv"
+                    app:layout_constraintStart_toStartOf="@+id/user_iv"
+                    app:layout_constraintTop_toBottomOf="@+id/user_iv"
+                    tools:text="Username" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/user_iv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/user_iv"
+                    app:layout_constraintTop_toTopOf="@+id/user_iv">
+
+                    <TextView
+                        android:id="@+id/photos_count_title_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:gravity="center"
+                        android:text="@string/photos"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.33" />
+
+                    <TextView
+                        android:id="@+id/photos_count_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="@id/photos_count_title_tv"
+                        app:layout_constraintStart_toStartOf="@id/photos_count_title_tv"
+                        app:layout_constraintTop_toBottomOf="@id/photos_count_title_tv"
+                        app:layout_constraintWidth_percent="0.33"
+                        tools:text="100" />
+
+                    <TextView
+                        android:id="@+id/likes_count_title_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/likes"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/photos_count_title_tv"
+                        app:layout_constraintTop_toTopOf="@+id/photos_count_title_tv"
+                        app:layout_constraintWidth_percent="0.33" />
+
+                    <TextView
+                        android:id="@+id/likes_count_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="@+id/likes_count_title_tv"
+                        app:layout_constraintTop_toBottomOf="@+id/likes_count_title_tv"
+                        app:layout_constraintWidth_percent="0.33"
+                        tools:text="5" />
+
+                    <TextView
+                        android:id="@+id/downloads_count_title_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/downloads"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/likes_count_title_tv"
+                        app:layout_constraintTop_toTopOf="@+id/likes_count_title_tv"
+                        app:layout_constraintWidth_percent="0.33" />
+
+                    <TextView
+                        android:id="@+id/downloads_count_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="@+id/downloads_count_title_tv"
+                        app:layout_constraintTop_toBottomOf="@+id/downloads_count_title_tv"
+                        app:layout_constraintWidth_percent="0.33"
+                        tools:text="965" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/photo_view"
+                />
+        </LinearLayout>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

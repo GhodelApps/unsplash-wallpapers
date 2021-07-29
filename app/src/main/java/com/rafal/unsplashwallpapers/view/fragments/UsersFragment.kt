@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.rafal.unsplashwallpapers.databinding.FragmentUsersBinding
 import com.rafal.unsplashwallpapers.view.adapters.ResultsLoadStateAdapter
 import com.rafal.unsplashwallpapers.view.adapters.UsersPagingAdapter
@@ -13,7 +14,7 @@ import com.rafal.unsplashwallpapers.view.viewmodels.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UsersFragment : Fragment() {
+class UsersFragment : Fragment(), UsersPagingAdapter.onUserClickListener {
 
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
@@ -31,7 +32,7 @@ class UsersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val pagingAdapter = UsersPagingAdapter()
+        val pagingAdapter = UsersPagingAdapter(this)
         val recyclerView = binding.usersRv
         recyclerView.adapter = pagingAdapter.withLoadStateHeaderAndFooter(
             header = ResultsLoadStateAdapter { pagingAdapter.retry() },
@@ -51,5 +52,10 @@ class UsersFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onUserClick(userID: String) {
+        val action = SearchFragmentDirections.actionSearchFragmentToUserDetailsFragment(userID = userID)
+        findNavController().navigate(action)
     }
 }

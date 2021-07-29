@@ -17,10 +17,10 @@ import com.rafal.unsplashwallpapers.R
 import com.rafal.unsplashwallpapers.databinding.UserViewBinding
 import com.rafal.unsplashwallpapers.model.UnsplashUser
 
-class UsersPagingAdapter :
+class UsersPagingAdapter(private val listener: onUserClickListener) :
     PagingDataAdapter<UnsplashUser, UsersPagingAdapter.UsersViewHolder>(User_Comparator) {
 
-    class UsersViewHolder(private val binding: UserViewBinding) :
+    inner class UsersViewHolder(private val binding: UserViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(user: UnsplashUser) {
             Glide.with(itemView)
@@ -54,6 +54,9 @@ class UsersPagingAdapter :
 
             binding.userName.text = user.name
             binding.userUsername.text = "@${user.username}"
+            binding.root.setOnClickListener {
+                listener.onUserClick(user.username)
+            }
         }
     }
 
@@ -62,7 +65,7 @@ class UsersPagingAdapter :
         viewType: Int
     ): UsersViewHolder {
         val binding = UserViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return UsersPagingAdapter.UsersViewHolder(binding)
+        return UsersViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: UsersViewHolder, position: Int) {
@@ -70,6 +73,10 @@ class UsersPagingAdapter :
 
         if (item != null)
             holder.bind(item)
+    }
+
+    interface onUserClickListener {
+        fun onUserClick(userID: String)
     }
 
     companion object {

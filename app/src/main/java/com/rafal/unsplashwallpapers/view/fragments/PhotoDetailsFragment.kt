@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -41,6 +42,7 @@ class PhotoDetailsFragment : Fragment() {
     private lateinit var photoUrl: String
 
     private lateinit var photoBitmap: Bitmap
+    private lateinit var username: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,6 +83,7 @@ class PhotoDetailsFragment : Fragment() {
                             photoDetailsLikes.text = photo.likes.toString()
                             photoDetailsDownloads.text = photo.downloads.toString()
                         }
+                        username = photo.user.username
                         photoUrl = photo.urls.regular
                         loadImage(photoUrl)
                         loadUserImage(photo.user.profile_image.large)
@@ -119,6 +122,14 @@ class PhotoDetailsFragment : Fragment() {
                 }
             setWallpaperDialog.show()
         }
+
+        binding.userContainer.setOnClickListener {
+            val action =
+                PhotoDetailsFragmentDirections.actionPhotoDetailsFragmentToUserDetailsFragment(
+                    userID = username
+                )
+            findNavController().navigate(action)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -135,6 +146,11 @@ class PhotoDetailsFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     private fun loadImage(url: String) {
