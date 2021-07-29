@@ -6,10 +6,4 @@
         android:icon="@drawable/ic_baseline_share_24"
         app:showAsAction="ifRoom"
         android:title="Share" />
-
-    <item
-        android:id="@+id/action_wallpaper"
-        android:icon="@drawable/ic_baseline_wallpaper_24"
-        app:showAsAction="ifRoom"
-        android:title="Wallpaper"/>
 </menu>

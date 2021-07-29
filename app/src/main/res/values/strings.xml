@@ -27,4 +27,5 @@
     <string name="set_as_wallpaper_message">Are you sure you want to set photo as Wallpaper?</string>
     <string name="failed_to_set_wallpaper">Failed to set new wallpaper</string>
     <string name="wallpaper_successfully_set">Wallpaper changed successfully</string>
+    <string name="set_as_wallpaper">Set as wallpaper</string>
 </resources>

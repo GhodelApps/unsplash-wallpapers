@@ -103,6 +103,22 @@ class PhotoDetailsFragment : Fragment() {
 
             viewModel.getPhoto(args.photoID)
         }
+
+        binding.photoDetailsSetWallpaperBtn.setOnClickListener {
+            val setWallpaperDialog = AlertDialog.Builder(requireContext())
+                .apply {
+                    setMessage(R.string.set_as_wallpaper_message)
+                    create()
+                    setPositiveButton(R.string.yes) { dialog, id ->
+                        setImageAsWallpaper()
+                        dialog.cancel()
+                    }
+                    setNegativeButton(R.string.no) { dialog, id ->
+                        dialog.cancel()
+                    }
+                }
+            setWallpaperDialog.show()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -115,22 +131,6 @@ class PhotoDetailsFragment : Fragment() {
                 photoUrl?.let { url ->
                     shareImageUrl(url)
                 }
-                true
-            }
-            R.id.action_wallpaper -> {
-                val setWallpaperDialog = AlertDialog.Builder(requireContext())
-                    .apply {
-                        setMessage(R.string.set_as_wallpaper_message)
-                        create()
-                        setPositiveButton(R.string.yes) { dialog, id ->
-                            setImageAsWallpaper()
-                            dialog.cancel()
-                        }
-                        setNegativeButton(R.string.no) { dialog, id ->
-                            dialog.cancel()
-                        }
-                    }
-                setWallpaperDialog.show()
                 true
             }
             else -> super.onOptionsItemSelected(item)
