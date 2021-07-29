@@ -45,4 +45,12 @@ class SearchViewModel @Inject constructor(
             }
         }
     }
+
+    fun searchCollections(query: String) {
+        viewModelScope.launch {
+            searchRepository.searchCollections(query).cachedIn(viewModelScope).collect {
+                _collectionLiveData.value = it
+            }
+        }
+    }
 }

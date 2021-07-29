@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.rafal.unsplashwallpapers.databinding.FragmentCollectionsBinding
 import com.rafal.unsplashwallpapers.repository.SearchRepository
+import com.rafal.unsplashwallpapers.view.adapters.CollectionsPagingAdapter
+import com.rafal.unsplashwallpapers.view.adapters.ResultsLoadStateAdapter
 import com.rafal.unsplashwallpapers.view.viewmodels.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -21,7 +23,7 @@ class CollectionsFragment : Fragment() {
     @Inject
     lateinit var searchRepository: SearchRepository
 
-    private val viewModel: SearchViewModel by viewModels()
+    private val viewModel: SearchViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +36,21 @@ class CollectionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val pagingAdapter = CollectionsPagingAdapter()
+        val recyclerView = binding.collectionsRv
+        recyclerView.adapter = pagingAdapter.withLoadStateHeaderAndFooter(
+            header = ResultsLoadStateAdapter { pagingAdapter.retry() },
+            footer = ResultsLoadStateAdapter { pagingAdapter.retry() }
+        )
+
+        binding.fab.setOnClickListener {
+            recyclerView.scrollToPosition(0)
+        }
+
+        viewModel.collectionLiveData.observe(viewLifecycleOwner) {
+            binding.photosEmptyIv.visibility = View.GONE
+            pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+        }
 
     }
 

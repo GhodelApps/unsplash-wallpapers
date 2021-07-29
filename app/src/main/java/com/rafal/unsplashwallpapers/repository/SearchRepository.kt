@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.rafal.unsplashwallpapers.model.UnsplashApi
+import com.rafal.unsplashwallpapers.model.UnsplashCollection
 import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
 import com.rafal.unsplashwallpapers.model.UnsplashUser
 import kotlinx.coroutines.flow.Flow
@@ -34,6 +35,18 @@ class SearchRepository @Inject constructor(
             )
         ) {
             UsersPagingSource(api, query)
+        }.flow
+    }
+
+    fun searchCollections(query: String): Flow<PagingData<UnsplashCollection>> {
+        return Pager(
+            PagingConfig(
+                enablePlaceholders = false,
+                pageSize = 10,
+                maxSize = 100
+            )
+        ) {
+            CollectionsPagingSource(api, query)
         }.flow
     }
 

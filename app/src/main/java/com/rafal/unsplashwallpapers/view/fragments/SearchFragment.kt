@@ -116,6 +116,7 @@ class SearchFragment : Fragment() {
         latestSearchQuery = query
         viewModel.searchPhotos(query, SORT_BY_RELEVANT)
         viewModel.searchUsers(query)
+        viewModel.searchCollections(query)
     }
 
     companion object {
