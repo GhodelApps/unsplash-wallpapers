@@ -18,6 +18,8 @@ class UsersFragment : Fragment() {
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
 
+    val viewModel: SearchViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,8 +30,6 @@ class UsersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val viewModel: SearchViewModel by activityViewModels()
 
         val pagingAdapter = UsersPagingAdapter()
         val recyclerView = binding.usersRv
@@ -46,7 +46,6 @@ class UsersFragment : Fragment() {
             binding.usersEmptyIv.visibility = View.GONE
             pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
-
     }
 
     override fun onDestroy() {

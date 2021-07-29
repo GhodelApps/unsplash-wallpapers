@@ -19,6 +19,8 @@ class PhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
     private var _binding: FragmentPhotosBinding? = null
     private val binding get() = _binding!!
 
+    val viewModel: SearchViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,8 +31,6 @@ class PhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val viewModel: SearchViewModel by activityViewModels()
 
         val pagingAdapter = PhotosPagingAdapter(this)
         val recyclerView = binding.photosRv
@@ -47,7 +47,6 @@ class PhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
             binding.photosEmptyIv.visibility = View.GONE
             pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
-
     }
 
     override fun onDestroy() {
@@ -56,7 +55,8 @@ class PhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
     }
 
     override fun onPhotoClick(photoID: String) {
-        val action = SearchFragmentDirections.actionSearchFragmentToPhotoDetailsFragment(photoID = photoID)
+        val action =
+            SearchFragmentDirections.actionSearchFragmentToPhotoDetailsFragment(photoID = photoID)
         findNavController().navigate(action)
     }
 

@@ -1,9 +1,13 @@
 package com.rafal.unsplashwallpapers.view.fragments
 
+import android.app.WallpaperManager
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -11,11 +15,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 import com.rafal.unsplashwallpapers.R
 import com.rafal.unsplashwallpapers.databinding.FragmentPhotoDetailsBinding
 import com.rafal.unsplashwallpapers.util.Resource
@@ -33,6 +40,7 @@ class PhotoDetailsFragment : Fragment() {
     private val viewModel: PhotoDetailsViewModel by viewModels()
     private lateinit var photoUrl: String
 
+    private lateinit var photoBitmap: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,12 +117,29 @@ class PhotoDetailsFragment : Fragment() {
                 }
                 true
             }
+            R.id.action_wallpaper -> {
+                val setWallpaperDialog = AlertDialog.Builder(requireContext())
+                    .apply {
+                        setMessage(R.string.set_as_wallpaper_message)
+                        create()
+                        setPositiveButton(R.string.yes) { dialog, id ->
+                            setImageAsWallpaper()
+                            dialog.cancel()
+                        }
+                        setNegativeButton(R.string.no) { dialog, id ->
+                            dialog.cancel()
+                        }
+                    }
+                setWallpaperDialog.show()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
     private fun loadImage(url: String) {
         Glide.with(this)
+            .asBitmap()
             .load(url)
             .error(R.drawable.ic_baseline_error_24)
             .apply(
@@ -123,11 +148,11 @@ class PhotoDetailsFragment : Fragment() {
                     .format(DecodeFormat.PREFER_ARGB_8888)
                     .transform(RoundedCorners(50))
             )
-            .listener(object : RequestListener<Drawable> {
+            .listener(object : RequestListener<Bitmap> {
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
-                    target: Target<Drawable>?,
+                    target: Target<Bitmap>?,
                     isFirstResource: Boolean
                 ): Boolean {
                     binding.photoDetailsProgress.visibility = View.GONE
@@ -135,9 +160,9 @@ class PhotoDetailsFragment : Fragment() {
                 }
 
                 override fun onResourceReady(
-                    resource: Drawable?,
+                    resource: Bitmap?,
                     model: Any?,
-                    target: Target<Drawable>?,
+                    target: Target<Bitmap>?,
                     dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
@@ -145,8 +170,16 @@ class PhotoDetailsFragment : Fragment() {
                     return false
                 }
             })
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(binding.photoDetailsIv)
+            .transition(BitmapTransitionOptions.withCrossFade())
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    photoBitmap = resource
+                    binding.photoDetailsIv.setImageBitmap(photoBitmap)
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+            })
     }
 
     private fun loadUserImage(url: String) {
@@ -166,6 +199,24 @@ class PhotoDetailsFragment : Fragment() {
         }
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
+    }
+
+    private fun setImageAsWallpaper() {
+        val wallpaperManager = WallpaperManager.getInstance(activity)
+        try {
+            wallpaperManager.setBitmap(photoBitmap)
+            Toast.makeText(
+                requireContext(),
+                R.string.wallpaper_successfully_set,
+                Toast.LENGTH_SHORT
+            ).show()
+        } catch (exception: Exception) {
+            Toast.makeText(
+                requireContext(),
+                R.string.failed_to_set_wallpaper,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
 }
