@@ -39,8 +39,7 @@ class UserDetailsFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getUser(args.userID)
-        viewModel.getUserPhotos(args.userID)
+        loadUserData()
 
         val pagingAdapter = PhotosPagingAdapter(this)
         val recyclerView = binding.rv
@@ -78,7 +77,7 @@ class UserDetailsFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener
         }
 
         binding.retryBtn.setOnClickListener {
-            viewModel.getUser(args.userID)
+            loadUserData()
             binding.apply {
                 failLayout.visibility = View.GONE
                 pb.visibility = View.VISIBLE
@@ -98,6 +97,11 @@ class UserDetailsFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener
             .error(R.drawable.ic_baseline_error_24)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(binding.userIv)
+    }
+
+    private fun loadUserData() {
+        viewModel.getUser(args.userID)
+        viewModel.getUserPhotos(args.userID)
     }
 
     override fun onPhotoClick(photoID: String) {

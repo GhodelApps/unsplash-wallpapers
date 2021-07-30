@@ -80,6 +80,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:id="@+id/photo_details_user_iv"
                         android:layout_width="48dp"

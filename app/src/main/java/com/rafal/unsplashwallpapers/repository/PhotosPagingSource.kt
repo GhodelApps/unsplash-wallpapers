@@ -5,7 +5,6 @@ import androidx.paging.PagingState
 import com.rafal.unsplashwallpapers.model.UnsplashApi
 import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
 import retrofit2.HttpException
-import retrofit2.awaitResponse
 import java.io.IOException
 
 class PhotosPagingSource(
@@ -22,7 +21,7 @@ class PhotosPagingSource(
         val position = params.key ?: 1
 
         return try {
-            val response = api.searchPhotos(query, position, sortBy).awaitResponse()
+            val response = api.searchPhotos(query, position, sortBy)
             val results = response.body()!!.results
             LoadResult.Page(
                 data = results,

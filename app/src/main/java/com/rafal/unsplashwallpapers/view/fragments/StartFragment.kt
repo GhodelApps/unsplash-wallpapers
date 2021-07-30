@@ -32,7 +32,7 @@ class StartFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.action_search -> {
                 val action = StartFragmentDirections.actionStartFragmentToSearchFragment()
                 findNavController().navigate(action)

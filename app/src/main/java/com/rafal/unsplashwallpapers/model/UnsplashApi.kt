@@ -1,43 +1,43 @@
 package com.rafal.unsplashwallpapers.model
 
-import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface UnsplashApi {
     @GET("search/photos")
-    fun searchPhotos(
+    suspend fun searchPhotos(
         @Query("query") query: String,
         @Query("page") page: Int,
         @Query("order_by") orderBy: String
-    ): Call<UnsplashSearchPhotoResults>
+    ): Response<UnsplashSearchPhotoResults>
 
     @GET("search/users")
-    fun searchUsers(
+    suspend fun searchUsers(
         @Query("query") query: String,
         @Query("page") page: Int
-    ): Call<UnsplashUserResults>
+    ): Response<UnsplashUserResults>
 
     @GET("search/collections")
-    fun searchCollections(
+    suspend fun searchCollections(
         @Query("query") query: String,
         @Query("page") page: Int
-    ): Call<UnsplashCollectionsResults>
+    ): Response<UnsplashCollectionsResults>
 
     @GET("photos/{id}")
-    fun getPhoto(
+    suspend fun getPhoto(
         @Path("id") id: String
-    ) : Call<UnsplashPhoto>
+    ): Response<UnsplashPhoto>
 
     @GET("users/{username}")
-    fun getUser(
+    suspend fun getUser(
         @Path("username") username: String
-    ) : Call<UnsplashUser>
+    ): Response<UnsplashUser>
 
     @GET("/users/{username}/photos")
-    fun getUserPhotos(
+    suspend fun getUserPhotos(
         @Path("username") username: String,
         @Query("page") page: Int
-    ) : Call<List<UnsplashSearchPhoto>>
+    ): Response<List<UnsplashSearchPhoto>>
 }

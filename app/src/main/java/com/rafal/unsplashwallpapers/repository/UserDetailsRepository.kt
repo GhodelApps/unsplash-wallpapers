@@ -9,7 +9,6 @@ import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
 import com.rafal.unsplashwallpapers.model.UnsplashUser
 import com.rafal.unsplashwallpapers.util.Resource
 import kotlinx.coroutines.flow.Flow
-import retrofit2.awaitResponse
 import javax.inject.Inject
 
 class UserDetailsRepository @Inject constructor(
@@ -17,7 +16,7 @@ class UserDetailsRepository @Inject constructor(
 ) {
     suspend fun getUser(username: String): Resource<UnsplashUser> {
         return try {
-            val resposne = api.getUser(username).awaitResponse()
+            val resposne = api.getUser(username)
             val body = resposne.body()
             if (resposne.isSuccessful && body != null) {
                 Resource.Success(body)
@@ -29,7 +28,7 @@ class UserDetailsRepository @Inject constructor(
         }
     }
 
-    fun getUserPhotos(username: String) : Flow<PagingData<UnsplashSearchPhoto>> {
+    fun getUserPhotos(username: String): Flow<PagingData<UnsplashSearchPhoto>> {
         return Pager(
             PagingConfig(
                 enablePlaceholders = false,

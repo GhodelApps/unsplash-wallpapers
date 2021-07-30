@@ -9,7 +9,7 @@
         android:id="@+id/startFragment"
         android:name="com.rafal.unsplashwallpapers.view.fragments.StartFragment"
         android:label="Wallpapers"
-        tools:layout="@layout/fragment_start" >
+        tools:layout="@layout/fragment_start">
         <action
             android:id="@+id/action_startFragment_to_searchFragment"
             app:destination="@id/searchFragment"
@@ -22,7 +22,7 @@
         android:id="@+id/searchFragment"
         android:name="com.rafal.unsplashwallpapers.view.fragments.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_photoDetailsFragment"
             app:destination="@id/photoDetailsFragment"

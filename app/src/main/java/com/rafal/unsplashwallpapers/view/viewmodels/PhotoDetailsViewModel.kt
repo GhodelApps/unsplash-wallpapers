@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PhotoDetailsViewModel @Inject constructor(
     private val repository: PhotoDetailsRepository
-): ViewModel() {
+) : ViewModel() {
     private val _photoLiveData: MutableLiveData<Resource<UnsplashPhoto>> = MutableLiveData()
     val photoLiveData: LiveData<Resource<UnsplashPhoto>> = _photoLiveData
 

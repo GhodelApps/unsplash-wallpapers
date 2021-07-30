@@ -11,15 +11,14 @@
         tools:listitem="@layout/photo_view"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <ImageView
         android:id="@+id/photos_empty_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/ic_baseline_image_search_128"
-        />
+        android:src="@drawable/ic_baseline_image_search_128" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_photos"
@@ -27,6 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp" />
 
 </FrameLayout>

@@ -5,7 +5,6 @@ import androidx.paging.PagingState
 import com.rafal.unsplashwallpapers.model.UnsplashApi
 import com.rafal.unsplashwallpapers.model.UnsplashUser
 import retrofit2.HttpException
-import retrofit2.awaitResponse
 import java.io.IOException
 
 class UsersPagingSource(
@@ -21,7 +20,7 @@ class UsersPagingSource(
         val position = params.key ?: 1
 
         return try {
-            val response = api.searchUsers(query, position).awaitResponse()
+            val response = api.searchUsers(query, position)
             val results = response.body()!!.results
             LoadResult.Page(
                 data = results,

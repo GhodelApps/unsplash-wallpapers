@@ -55,7 +55,8 @@ class UsersFragment : Fragment(), UsersPagingAdapter.onUserClickListener {
     }
 
     override fun onUserClick(userID: String) {
-        val action = SearchFragmentDirections.actionSearchFragmentToUserDetailsFragment(userID = userID)
+        val action =
+            SearchFragmentDirections.actionSearchFragmentToUserDetailsFragment(userID = userID)
         findNavController().navigate(action)
     }
 }

@@ -25,7 +25,8 @@ class UserDetailsViewModel @Inject constructor(
     private val _userLiveData: MutableLiveData<Resource<UnsplashUser>> = MutableLiveData()
     val userLiveData: LiveData<Resource<UnsplashUser>> = _userLiveData
 
-    private val _userPhotosLiveData: MutableLiveData<PagingData<UnsplashSearchPhoto>> = MutableLiveData()
+    private val _userPhotosLiveData: MutableLiveData<PagingData<UnsplashSearchPhoto>> =
+        MutableLiveData()
     val userPhotosLiveData: LiveData<PagingData<UnsplashSearchPhoto>> = _userPhotosLiveData
 
     fun getUser(username: String) {

@@ -44,7 +44,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideApi(retrofit: Retrofit) : UnsplashApi {
+    fun provideApi(retrofit: Retrofit): UnsplashApi {
         return retrofit.create(UnsplashApi::class.java)
     }
 }
