@@ -6,6 +6,7 @@ Fetches data from Unsplash API
 
 - Android Studio
 - Android SDK
+- MVVM Architecture
 - Retrofit 2
 - Hilt
 - RecyclerView
