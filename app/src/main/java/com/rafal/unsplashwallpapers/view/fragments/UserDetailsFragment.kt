@@ -42,7 +42,7 @@ class UserDetailsFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener
         loadUserData()
 
         val pagingAdapter = PhotosPagingAdapter(this)
-        val recyclerView = binding.rv
+        val recyclerView = binding.userDetailsRv
         recyclerView.adapter = pagingAdapter.withLoadStateHeaderAndFooter(
             header = ResultsLoadStateAdapter { pagingAdapter.retry() },
             footer = ResultsLoadStateAdapter { pagingAdapter.retry() }

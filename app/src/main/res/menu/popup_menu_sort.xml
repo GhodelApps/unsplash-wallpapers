@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/popup_sort_relevance"
-        android:title="@string/relevance"/>
+        android:title="@string/relevance" />
     <item
         android:id="@+id/popup_sort_latest"
         android:title="@string/latest" />

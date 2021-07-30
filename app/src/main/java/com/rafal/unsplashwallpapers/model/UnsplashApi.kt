@@ -6,6 +6,12 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface UnsplashApi {
+    @GET("photos")
+    suspend fun getAllPhotos(
+        @Query("page") page: Int,
+        @Query("order_by") orderBy: String
+    ): Response<List<UnsplashSearchPhoto>>
+
     @GET("search/photos")
     suspend fun searchPhotos(
         @Query("query") query: String,
@@ -45,5 +51,5 @@ interface UnsplashApi {
     suspend fun getCollectionPhotos(
         @Path("id") id: String,
         @Query("page") page: Int
-    ) : Response<List<UnsplashSearchPhoto>>
+    ): Response<List<UnsplashSearchPhoto>>
 }

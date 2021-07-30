@@ -37,7 +37,7 @@ class CollectionDetailsFragment : Fragment(), PhotosPagingAdapter.onPhotoClickLi
         viewModel.getCollectionPhotos(args.collectionID)
 
         val adapter = PhotosPagingAdapter(this)
-        val recycler = binding.rv
+        val recycler = binding.collectionsDetailsRv
         recycler.adapter = adapter.withLoadStateHeaderAndFooter(
             header = ResultsLoadStateAdapter { adapter.retry() },
             footer = ResultsLoadStateAdapter { adapter.retry() }
@@ -47,7 +47,7 @@ class CollectionDetailsFragment : Fragment(), PhotosPagingAdapter.onPhotoClickLi
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
-        binding.fab.setOnClickListener {
+        binding.collectionsDetailsFab.setOnClickListener {
             recycler.scrollToPosition(0)
         }
     }

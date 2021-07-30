@@ -8,10 +8,10 @@ import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class CollectionPhotosRepository @Inject constructor(
+class AllPhotosRepository @Inject constructor(
     private val api: UnsplashApi
 ) {
-    fun getCollectionPhotos(id: String): Flow<PagingData<UnsplashSearchPhoto>> {
+    fun getAllPhotos(orderBy: String): Flow<PagingData<UnsplashSearchPhoto>> {
         return Pager(
             PagingConfig(
                 enablePlaceholders = false,
@@ -19,7 +19,7 @@ class CollectionPhotosRepository @Inject constructor(
                 maxSize = 100
             )
         ) {
-            CollectionPhotosPagingSource(api, id)
+            AllPhotosPagingSource(api, orderBy)
         }.flow
     }
 }

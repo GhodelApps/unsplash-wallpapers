@@ -6,6 +6,7 @@ import android.widget.PopupMenu
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayoutMediator
 import com.rafal.unsplashwallpapers.R
 import com.rafal.unsplashwallpapers.databinding.FragmentSearchBinding
@@ -21,12 +22,14 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: SearchViewModel by activityViewModels()
+    private val args: SearchFragmentArgs by navArgs()
 
     private var latestSearchQuery = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(
@@ -45,6 +48,9 @@ class SearchFragment : Fragment() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = resources.getStringArray(R.array.main_tabs_titles)[position]
         }.attach()
+
+        if (latestSearchQuery.isNullOrEmpty())
+            search(args.queryString)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

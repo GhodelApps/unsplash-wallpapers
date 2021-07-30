@@ -4,21 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.fragments.CollectionDetailsFragment">
+    tools:context=".view.fragments.AllPhotosFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/collections_details_rv"
+        android:id="@+id/all_photos_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/photo_view"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/photo_view" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/collections_details_fab"
+        android:id="@+id/all_photos_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
-        android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
-        android:layout_margin="16dp" />
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_baseline_keyboard_arrow_up_24" />
 
 </FrameLayout>

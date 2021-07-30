@@ -61,7 +61,10 @@ class CollectionsFragment : Fragment(), CollectionsPagingAdapter.onCollectionCli
 
     override fun onCollectionClick(id: String, title: String) {
         val action =
-            SearchFragmentDirections.actionSearchFragmentToCollectionDetailsFragment(collectionID = id, collectionTitle = title)
+            SearchFragmentDirections.actionSearchFragmentToCollectionDetailsFragment(
+                collectionID = id,
+                collectionTitle = title
+            )
         findNavController().navigate(action)
     }
 

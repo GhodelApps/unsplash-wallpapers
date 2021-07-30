@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.rafal.unsplashwallpapers.view.fragments.StartFragment"
+        android:name="com.rafal.unsplashwallpapers.view.fragments.AllPhotosFragment"
         android:label="Wallpapers"
-        tools:layout="@layout/fragment_start">
+        tools:layout="@layout/fragment_all_photos">
         <action
             android:id="@+id/action_startFragment_to_searchFragment"
             app:destination="@id/searchFragment"
@@ -17,6 +17,9 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_startFragment_to_photoDetailsFragment"
+            app:destination="@id/photoDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -36,6 +39,9 @@
         <action
             android:id="@+id/action_searchFragment_to_collectionDetailsFragment"
             app:destination="@id/collectionDetailsFragment" />
+        <argument
+            android:name="queryString"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/photoDetailsFragment"
@@ -64,7 +70,7 @@
     <fragment
         android:id="@+id/collectionDetailsFragment"
         android:name="com.rafal.unsplashwallpapers.view.fragments.CollectionDetailsFragment"
-        android:label="Collection details: {collectionTitle}"
+        android:label="Collection photos"
         tools:layout="@layout/fragment_collection_details">
         <argument
             android:name="collectionID"
@@ -74,8 +80,8 @@
             app:destination="@id/photoDetailsFragment" />
         <argument
             android:name="collectionTitle"
-            app:argType="string"
-            android:defaultValue="Collection details" />
+            android:defaultValue="Collection details"
+            app:argType="string" />
     </fragment>
 
 </navigation>

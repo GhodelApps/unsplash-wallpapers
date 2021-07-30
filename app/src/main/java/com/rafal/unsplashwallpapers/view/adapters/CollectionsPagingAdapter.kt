@@ -88,7 +88,7 @@ class CollectionsPagingAdapter(private val listener: onCollectionClickListener) 
     }
 
     interface onCollectionClickListener {
-        fun onCollectionClick(id: String, title:String)
+        fun onCollectionClick(id: String, title: String)
     }
 
     companion object {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Unsplash</string>
+    <string name="app_name">Wallpapers</string>
     <string-array name="main_tabs_titles">
         <item>Photos</item>
         <item>Collections</item>
@@ -30,4 +30,6 @@
     <string name="set_as_wallpaper">Set as wallpaper</string>
     <string name="photos">Photos</string>
     <string name="error_loading_user_details">Error loading user details</string>
+    <string name="oldest">Oldest</string>
+    <string name="popular">Popular</string>
 </resources>

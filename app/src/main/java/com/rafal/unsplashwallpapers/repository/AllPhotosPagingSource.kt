@@ -7,9 +7,9 @@ import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
 import retrofit2.HttpException
 import java.io.IOException
 
-class CollectionPhotosPagingSource(
+class AllPhotosPagingSource(
     private val api: UnsplashApi,
-    private val id: String
+    private val orderBy: String
 ) : PagingSource<Int, UnsplashSearchPhoto>() {
     override fun getRefreshKey(state: PagingState<Int, UnsplashSearchPhoto>): Int? {
         return state.anchorPosition
@@ -19,7 +19,7 @@ class CollectionPhotosPagingSource(
         val position = params.key ?: 1
 
         return try {
-            val response = api.getCollectionPhotos(id, position)
+            val response = api.getAllPhotos(position, orderBy)
             val body = response.body()!!
             LoadResult.Page(
                 data = body,
