@@ -57,8 +57,6 @@ class SearchFragment : Fragment() {
         inflater.inflate(R.menu.search_menu, menu)
 
         val searchView = menu.findItem(R.id.action_search_search_fragment).actionView as SearchView
-        searchView.queryHint = getString(R.string.query_hint)
-
         setSearchViewOnQueryTextListener(searchView)
     }
 
