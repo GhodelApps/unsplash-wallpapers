@@ -20,11 +20,11 @@ import com.rafal.unsplashwallpapers.R
 import com.rafal.unsplashwallpapers.databinding.CollectionsViewBinding
 import com.rafal.unsplashwallpapers.model.UnsplashCollection
 
-class CollectionsPagingAdapter :
+class CollectionsPagingAdapter(private val listener: onCollectionClickListener) :
     PagingDataAdapter<UnsplashCollection, CollectionsPagingAdapter.CollectionsViewHolder>(
         Collections_Comparator
     ) {
-    class CollectionsViewHolder(private val binding: CollectionsViewBinding) :
+    inner class CollectionsViewHolder(private val binding: CollectionsViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(collection: UnsplashCollection) {
             binding.apply {
@@ -66,6 +66,10 @@ class CollectionsPagingAdapter :
                     })
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(binding.iv)
+
+                root.setOnClickListener {
+                    listener.onCollectionClick(collection.id, collection.title)
+                }
             }
         }
     }
@@ -81,6 +85,10 @@ class CollectionsPagingAdapter :
         val binding =
             CollectionsViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CollectionsViewHolder(binding)
+    }
+
+    interface onCollectionClickListener {
+        fun onCollectionClick(id: String, title:String)
     }
 
     companion object {

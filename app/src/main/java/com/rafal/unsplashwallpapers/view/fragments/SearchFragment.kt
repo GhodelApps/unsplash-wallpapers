@@ -45,7 +45,6 @@ class SearchFragment : Fragment() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = resources.getStringArray(R.array.main_tabs_titles)[position]
         }.attach()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -68,7 +67,7 @@ class SearchFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        super.onDestroyView()
+        super.onDestroy()
         _binding = null
     }
 

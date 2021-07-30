@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.rafal.unsplashwallpapers.databinding.FragmentCollectionsBinding
 import com.rafal.unsplashwallpapers.repository.SearchRepository
 import com.rafal.unsplashwallpapers.view.adapters.CollectionsPagingAdapter
@@ -15,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CollectionsFragment : Fragment() {
+class CollectionsFragment : Fragment(), CollectionsPagingAdapter.onCollectionClickListener {
 
     private var _binding: FragmentCollectionsBinding? = null
     private val binding get() = _binding!!
@@ -36,7 +37,7 @@ class CollectionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val pagingAdapter = CollectionsPagingAdapter()
+        val pagingAdapter = CollectionsPagingAdapter(this)
         val recyclerView = binding.collectionsRv
         recyclerView.adapter = pagingAdapter.withLoadStateHeaderAndFooter(
             header = ResultsLoadStateAdapter { pagingAdapter.retry() },
@@ -51,12 +52,17 @@ class CollectionsFragment : Fragment() {
             binding.photosEmptyIv.visibility = View.GONE
             pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
-
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onCollectionClick(id: String, title: String) {
+        val action =
+            SearchFragmentDirections.actionSearchFragmentToCollectionDetailsFragment(collectionID = id, collectionTitle = title)
+        findNavController().navigate(action)
     }
 
 }

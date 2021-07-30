@@ -35,9 +35,15 @@ interface UnsplashApi {
         @Path("username") username: String
     ): Response<UnsplashUser>
 
-    @GET("/users/{username}/photos")
+    @GET("users/{username}/photos")
     suspend fun getUserPhotos(
         @Path("username") username: String,
         @Query("page") page: Int
     ): Response<List<UnsplashSearchPhoto>>
+
+    @GET("collections/{id}/photos")
+    suspend fun getCollectionPhotos(
+        @Path("id") id: String,
+        @Query("page") page: Int
+    ) : Response<List<UnsplashSearchPhoto>>
 }
