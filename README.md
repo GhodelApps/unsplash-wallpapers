@@ -8,6 +8,7 @@ Fetches data from Unsplash API
 - Android SDK
 - MVVM Architecture
 - Retrofit 2
+- Room
 - Hilt
 - RecyclerView
 - Paging 3
