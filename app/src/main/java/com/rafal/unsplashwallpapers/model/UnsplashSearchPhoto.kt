@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class UnsplashSearchPhoto(
     @PrimaryKey val id: String,
     val description: String?,
-    val urls: UnsplashPhotoUrls,
+    @Embedded val urls: UnsplashPhotoUrls,
     val likes: Int,
     @Embedded val user: UnsplashUser
 )

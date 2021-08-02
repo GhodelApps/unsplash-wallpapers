@@ -1,9 +1,13 @@
 package com.rafal.unsplashwallpapers.di
 
+import android.content.Context
+import androidx.room.Room
 import com.rafal.unsplashwallpapers.model.UnsplashApi
+import com.rafal.unsplashwallpapers.model.db.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -47,4 +51,14 @@ class AppModule {
     fun provideApi(retrofit: Retrofit): UnsplashApi {
         return retrofit.create(UnsplashApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideDb(@ApplicationContext appContext: Context): AppDatabase {
+        return Room.databaseBuilder(
+            appContext,
+            AppDatabase::class.java, "unsplash_database"
+        ).build()
+    }
+
 }

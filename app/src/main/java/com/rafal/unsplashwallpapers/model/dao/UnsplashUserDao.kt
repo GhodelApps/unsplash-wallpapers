@@ -1,5 +1,6 @@
 package com.rafal.unsplashwallpapers.model.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -16,4 +17,7 @@ interface UnsplashUserDao {
 
     @Query("SELECT * FROM user")
     fun getAll(): List<UnsplashUser>
+
+    @Query("SELECT * FROM user")
+    fun pagingSource(): PagingSource<Int, UnsplashUser>
 }

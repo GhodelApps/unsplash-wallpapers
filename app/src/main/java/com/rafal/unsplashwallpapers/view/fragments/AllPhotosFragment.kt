@@ -7,6 +7,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import com.rafal.unsplashwallpapers.R
 import com.rafal.unsplashwallpapers.databinding.FragmentAllPhotosBinding
@@ -36,6 +37,7 @@ class AllPhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
         return binding.root
     }
 
+    @ExperimentalPagingApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -99,6 +101,7 @@ class AllPhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
         })
     }
 
+    @ExperimentalPagingApi
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_sort -> {
@@ -143,6 +146,7 @@ class AllPhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
         findNavController().navigate(action)
     }
 
+    @ExperimentalPagingApi
     private fun getAllPhotos(orderBy: String) {
         viewModel.getAllPhotos(orderBy)
     }
