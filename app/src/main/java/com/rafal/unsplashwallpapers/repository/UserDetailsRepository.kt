@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import com.rafal.unsplashwallpapers.model.UnsplashApi
 import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
 import com.rafal.unsplashwallpapers.model.UnsplashUser
+import com.rafal.unsplashwallpapers.model.pagingsource.UserPhotosPagingSource
 import com.rafal.unsplashwallpapers.util.Resource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

@@ -1,27 +1,26 @@
-package com.rafal.unsplashwallpapers.repository
+package com.rafal.unsplashwallpapers.model.pagingsource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.rafal.unsplashwallpapers.model.UnsplashApi
-import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
+import com.rafal.unsplashwallpapers.model.UnsplashUser
 import retrofit2.HttpException
 import java.io.IOException
 
-class PhotosPagingSource(
+class UsersPagingSource(
     private val api: UnsplashApi,
-    private val query: String,
-    private val sortBy: String
-) : PagingSource<Int, UnsplashSearchPhoto>() {
+    private val query: String
+) : PagingSource<Int, UnsplashUser>() {
 
-    override fun getRefreshKey(state: PagingState<Int, UnsplashSearchPhoto>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, UnsplashUser>): Int? {
         return state.anchorPosition
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UnsplashSearchPhoto> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UnsplashUser> {
         val position = params.key ?: 1
 
         return try {
-            val response = api.searchPhotos(query, position, sortBy)
+            val response = api.searchUsers(query, position)
             val results = response.body()!!.results
             LoadResult.Page(
                 data = results,
@@ -35,6 +34,5 @@ class PhotosPagingSource(
         } catch (exception: NullPointerException) {
             return LoadResult.Error(exception)
         }
-
     }
 }

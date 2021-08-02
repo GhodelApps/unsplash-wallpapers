@@ -1,4 +1,4 @@
-package com.rafal.unsplashwallpapers.repository
+package com.rafal.unsplashwallpapers.model.pagingsource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
