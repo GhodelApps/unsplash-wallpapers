@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tapety</string>
+    <string name="retry">Spróbuj ponownie</string>
+    <string name="search">Szukaj</string>
+    <string name="relevance">Najlepiej dopasowane</string>
+    <string name="latest">Najnowsze</string>
+    <string name="camera_model">Model aparatu</string>
+    <string name="camera">Producent aparatu</string>
+    <string name="aperture">Przesłona</string>
+    <string name="focal_length">Długość ogniskowa</string>
+    <string name="shutter_speed">Przesłona</string>
+    <string name="iso">ISO</string>
+    <string name="dimensions">Wymiary</string>
+    <string name="downloads">Pobrania</string>
+    <string name="likes">Polubienia</string>
+    <string name="unknown">Nieznane</string>
+    <string name="error_loading_photo_details">Błąd wczytywania danych zdjęcia</string>
+    <string name="query_hint">Szukaj...</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string name="set_as_wallpaper_message">Czy na pewno zmienić tapete?</string>
+    <string name="failed_to_set_wallpaper">Błąd ustawiania tapety</string>
+    <string name="wallpaper_successfully_set">Tapeta została zmieniona</string>
+    <string name="set_as_wallpaper">Ustaw jako tapeta</string>
+    <string name="photos">Zdjęcia</string>
+    <string name="collections">Kolekcje</string>
+    <string name="users">Użytkownicy</string>
+    <string name="error_loading_user_details">Błąd wczytywania danych użytkownia</string>
+    <string name="oldest">Najstarsze</string>
+    <string name="popular">Popularne</string>
+    <string name="error_loading_photo">Błąd wczytywania zdjęć</string>
+    <string name="error_loading_users">Błąd wczytywania użytkowników</string>
+    <string name="error_loading_collections">Błąd wczytywania kolekcji zdjęć</string>
+    <string name="wallpapers">Tapety</string>
+    <string name="user_details">Szczegóły użytkownika</string>
+    <string name="photo_details">Szczegóły zdjęcia</string>
+    <string name="collection_details">Szczegóły kolekcji</string>
+    <string name="sort">Sortuj</string>
+    <string name="share">Udostępnij</string>
+</resources>

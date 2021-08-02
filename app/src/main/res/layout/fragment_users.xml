@@ -7,6 +7,30 @@
     tools:context=".view.fragments.UsersFragment"
     android:padding="10dp">
 
+    <LinearLayout
+        android:id="@+id/users_fail_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:text="@string/error_loading_users"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/users_retry_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/retry" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/users_rv"
         tools:listitem="@layout/user_view"

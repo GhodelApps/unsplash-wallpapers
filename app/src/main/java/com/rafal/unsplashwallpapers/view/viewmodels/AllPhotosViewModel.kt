@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
 import com.rafal.unsplashwallpapers.repository.AllPhotosRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,9 +21,10 @@ class AllPhotosViewModel @Inject constructor(
         MutableLiveData()
     val allPhotosLiveData: LiveData<PagingData<UnsplashSearchPhoto>> = _allPhotosLiveData
 
+    @ExperimentalPagingApi
     fun getAllPhotos(orderBy: String) {
         viewModelScope.launch {
-            repo.getAllPhotos(orderBy).cachedIn(viewModelScope).collect {
+            repo.getAllPhotos(orderBy).collect {
                 _allPhotosLiveData.value = it
             }
         }

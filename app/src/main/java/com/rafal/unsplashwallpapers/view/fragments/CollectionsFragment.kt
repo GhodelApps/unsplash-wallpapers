@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import com.rafal.unsplashwallpapers.databinding.FragmentCollectionsBinding
 import com.rafal.unsplashwallpapers.repository.SearchRepository
 import com.rafal.unsplashwallpapers.view.adapters.CollectionsPagingAdapter
@@ -39,6 +40,25 @@ class CollectionsFragment : Fragment(), CollectionsPagingAdapter.onCollectionCli
 
         val pagingAdapter = CollectionsPagingAdapter(this)
         val recyclerView = binding.collectionsRv
+
+        pagingAdapter.addLoadStateListener {
+            if (it.refresh is LoadState.Error) {
+                binding.apply {
+                    collectionsFailLayout.visibility = View.VISIBLE
+                    collectionsRv.visibility = View.GONE
+                }
+            } else {
+                binding.apply {
+                    collectionsFailLayout.visibility = View.GONE
+                    collectionsRv.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        binding.collectionsRetryBtn.setOnClickListener {
+            pagingAdapter.retry()
+        }
+
         recyclerView.adapter = pagingAdapter.withLoadStateHeaderAndFooter(
             header = ResultsLoadStateAdapter { pagingAdapter.retry() },
             footer = ResultsLoadStateAdapter { pagingAdapter.retry() }

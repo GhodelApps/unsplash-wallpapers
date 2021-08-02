@@ -7,6 +7,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadState
 import com.rafal.unsplashwallpapers.R
 import com.rafal.unsplashwallpapers.databinding.FragmentAllPhotosBinding
 import com.rafal.unsplashwallpapers.view.adapters.PhotosPagingAdapter
@@ -35,11 +37,31 @@ class AllPhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
         return binding.root
     }
 
+    @ExperimentalPagingApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val pagingAdapter = PhotosPagingAdapter(this)
         val recycler = binding.allPhotosRv
+
+        pagingAdapter.addLoadStateListener {
+            if (it.refresh is LoadState.Error) {
+                binding.apply {
+                    allPhotoFailLayout.visibility = View.VISIBLE
+                    allPhotosRv.visibility = View.GONE
+                }
+            } else {
+                binding.apply {
+                    allPhotoFailLayout.visibility = View.GONE
+                    allPhotosRv.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        binding.allPhotoRetryBtn.setOnClickListener {
+            pagingAdapter.retry()
+        }
+
         recycler.adapter = pagingAdapter.withLoadStateHeaderAndFooter(
             header = ResultsLoadStateAdapter { pagingAdapter.retry() },
             footer = ResultsLoadStateAdapter { pagingAdapter.retry() }
@@ -79,6 +101,7 @@ class AllPhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
         })
     }
 
+    @ExperimentalPagingApi
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_sort -> {
@@ -123,6 +146,7 @@ class AllPhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
         findNavController().navigate(action)
     }
 
+    @ExperimentalPagingApi
     private fun getAllPhotos(orderBy: String) {
         viewModel.getAllPhotos(orderBy)
     }

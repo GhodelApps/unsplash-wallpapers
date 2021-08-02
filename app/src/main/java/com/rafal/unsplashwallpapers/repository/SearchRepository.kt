@@ -7,6 +7,9 @@ import com.rafal.unsplashwallpapers.model.UnsplashApi
 import com.rafal.unsplashwallpapers.model.UnsplashCollection
 import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
 import com.rafal.unsplashwallpapers.model.UnsplashUser
+import com.rafal.unsplashwallpapers.model.pagingsource.CollectionsPagingSource
+import com.rafal.unsplashwallpapers.model.pagingsource.PhotosPagingSource
+import com.rafal.unsplashwallpapers.model.pagingsource.UsersPagingSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
