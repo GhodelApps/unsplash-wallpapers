@@ -37,7 +37,7 @@ class PhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
         val recyclerView = binding.photosRv
 
         pagingAdapter.addLoadStateListener {
-            if(it.refresh is LoadState.Error) {
+            if (it.refresh is LoadState.Error) {
                 binding.apply {
                     photoFailLayout.visibility = View.VISIBLE
                     photosRv.visibility = View.GONE

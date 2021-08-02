@@ -37,7 +37,7 @@ class UsersFragment : Fragment(), UsersPagingAdapter.onUserClickListener {
         val recyclerView = binding.usersRv
 
         pagingAdapter.addLoadStateListener {
-            if(it.refresh is LoadState.Error) {
+            if (it.refresh is LoadState.Error) {
                 binding.apply {
                     usersFailLayout.visibility = View.VISIBLE
                     usersRv.visibility = View.GONE

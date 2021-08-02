@@ -42,7 +42,7 @@ class CollectionsFragment : Fragment(), CollectionsPagingAdapter.onCollectionCli
         val recyclerView = binding.collectionsRv
 
         pagingAdapter.addLoadStateListener {
-            if(it.refresh is LoadState.Error) {
+            if (it.refresh is LoadState.Error) {
                 binding.apply {
                     collectionsFailLayout.visibility = View.VISIBLE
                     collectionsRv.visibility = View.GONE
