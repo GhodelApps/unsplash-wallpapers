@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/startFragment"
         android:name="com.rafal.unsplashwallpapers.view.fragments.AllPhotosFragment"
-        android:label="Wallpapers"
+        android:label="@string/wallpapers"
         tools:layout="@layout/fragment_all_photos">
         <action
             android:id="@+id/action_startFragment_to_searchFragment"
@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.rafal.unsplashwallpapers.view.fragments.SearchFragment"
-        android:label="Search"
+        android:label="@string/search"
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_photoDetailsFragment"
@@ -46,7 +46,7 @@
     <fragment
         android:id="@+id/photoDetailsFragment"
         android:name="com.rafal.unsplashwallpapers.view.fragments.PhotoDetailsFragment"
-        android:label="Photo details"
+        android:label="@string/photo_details"
         tools:layout="@layout/fragment_photo_details">
         <argument
             android:name="photoID"
@@ -58,7 +58,7 @@
     <fragment
         android:id="@+id/userDetailsFragment"
         android:name="com.rafal.unsplashwallpapers.view.fragments.UserDetailsFragment"
-        android:label="User details"
+        android:label="@string/user_details"
         tools:layout="@layout/fragment_user_details">
         <argument
             android:name="userID"
@@ -70,7 +70,7 @@
     <fragment
         android:id="@+id/collectionDetailsFragment"
         android:name="com.rafal.unsplashwallpapers.view.fragments.CollectionDetailsFragment"
-        android:label="Collection photos"
+        android:label="@string/collection_details"
         tools:layout="@layout/fragment_collection_details">
         <argument
             android:name="collectionID"

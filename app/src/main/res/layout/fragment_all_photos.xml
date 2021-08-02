@@ -6,6 +6,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragments.AllPhotosFragment">
 
+    <LinearLayout
+        android:id="@+id/all_photo_fail_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:text="@string/error_loading_photo"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/all_photo_retry_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/retry" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/all_photos_rv"
         android:layout_width="match_parent"

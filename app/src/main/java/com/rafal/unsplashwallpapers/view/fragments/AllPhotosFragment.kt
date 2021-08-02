@@ -7,6 +7,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import com.rafal.unsplashwallpapers.R
 import com.rafal.unsplashwallpapers.databinding.FragmentAllPhotosBinding
 import com.rafal.unsplashwallpapers.view.adapters.PhotosPagingAdapter
@@ -40,6 +41,25 @@ class AllPhotosFragment : Fragment(), PhotosPagingAdapter.onPhotoClickListener {
 
         val pagingAdapter = PhotosPagingAdapter(this)
         val recycler = binding.allPhotosRv
+
+        pagingAdapter.addLoadStateListener {
+            if(it.refresh is LoadState.Error) {
+                binding.apply {
+                    allPhotoFailLayout.visibility = View.VISIBLE
+                    allPhotosRv.visibility = View.GONE
+                }
+            } else {
+                binding.apply {
+                    allPhotoFailLayout.visibility = View.GONE
+                    allPhotosRv.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        binding.allPhotoRetryBtn.setOnClickListener {
+            pagingAdapter.retry()
+        }
+
         recycler.adapter = pagingAdapter.withLoadStateHeaderAndFooter(
             header = ResultsLoadStateAdapter { pagingAdapter.retry() },
             footer = ResultsLoadStateAdapter { pagingAdapter.retry() }
