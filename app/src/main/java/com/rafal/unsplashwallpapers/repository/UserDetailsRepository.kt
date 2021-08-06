@@ -17,12 +17,12 @@ class UserDetailsRepository @Inject constructor(
 ) {
     suspend fun getUser(username: String): Resource<UnsplashUser> {
         return try {
-            val resposne = api.getUser(username)
-            val body = resposne.body()
-            if (resposne.isSuccessful && body != null) {
+            val response = api.getUser(username)
+            val body = response.body()
+            if (response.isSuccessful && body != null) {
                 Resource.Success(body)
             } else {
-                Resource.Fail(resposne.message())
+                Resource.Fail(response.message())
             }
         } catch (e: Exception) {
             Resource.Fail(e.message ?: "Error")
