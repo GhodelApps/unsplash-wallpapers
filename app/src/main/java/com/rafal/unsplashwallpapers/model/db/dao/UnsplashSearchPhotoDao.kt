@@ -10,7 +10,7 @@ import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
 @Dao
 interface UnsplashSearchPhotoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(users: List<UnsplashSearchPhoto>)
+    suspend fun insertAll(photos: List<UnsplashSearchPhoto>)
 
     @Query("DELETE FROM search_photo")
     suspend fun clearAll()
