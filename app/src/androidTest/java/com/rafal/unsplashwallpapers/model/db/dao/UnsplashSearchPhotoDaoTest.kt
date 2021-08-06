@@ -7,9 +7,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
-import com.rafal.unsplashwallpapers.model.UnsplashPhotoUrls
-import com.rafal.unsplashwallpapers.model.UnsplashSearchPhoto
-import com.rafal.unsplashwallpapers.model.UnsplashUser
+import com.rafal.unsplashwallpapers.model.UnsplashPhotoFactory
 import com.rafal.unsplashwallpapers.model.db.AppDatabase
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -25,37 +23,11 @@ class UnsplashSearchPhotoDaoTest {
     private lateinit var photoDao: UnsplashSearchPhotoDao
     private lateinit var db: AppDatabase
 
-    private val photos = listOf<UnsplashSearchPhoto>(
-        UnsplashSearchPhoto(
-            id = "1",
-            description = "desc",
-            urls = UnsplashPhotoUrls("raw", "full", "regular", "small", "thumb"),
-            likes = 5,
-            user = UnsplashUser(
-                id = "1",
-                name = "Jake",
-                username = "jake123",
-                profile_image = UnsplashUser.ProfileImage("small", "medium", "large"),
-                10,
-                10,
-                10
-            )
-        ),
-        UnsplashSearchPhoto(
-            id = "2",
-            description = "desc",
-            urls = UnsplashPhotoUrls("raw", "full", "regular", "small", "thumb"),
-            likes = 5,
-            user = UnsplashUser(
-                id = "1",
-                name = "Mike",
-                username = "mike123",
-                profile_image = UnsplashUser.ProfileImage("small", "medium", "large"),
-                5,
-                101,
-                1
-            )
-        )
+    private val photoFactory = UnsplashPhotoFactory()
+
+    private val photos = listOf(
+        photoFactory.createUnsplashPhoto(),
+        photoFactory.createUnsplashPhoto()
     )
 
     @get:Rule

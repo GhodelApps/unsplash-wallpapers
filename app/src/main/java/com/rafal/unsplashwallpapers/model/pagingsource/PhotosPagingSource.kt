@@ -22,6 +22,7 @@ class PhotosPagingSource(
 
         return try {
             val response = api.searchPhotos(query, position, sortBy)
+
             val results = response.body()!!.results
             LoadResult.Page(
                 data = results,
