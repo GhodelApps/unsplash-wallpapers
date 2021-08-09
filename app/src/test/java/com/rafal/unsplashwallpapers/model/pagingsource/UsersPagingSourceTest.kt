@@ -3,25 +3,26 @@ package com.rafal.unsplashwallpapers.model.pagingsource
 import androidx.paging.PagingSource
 import com.google.common.truth.Truth.assertThat
 import com.rafal.unsplashwallpapers.model.FakeUnsplashApi
-import com.rafal.unsplashwallpapers.model.UnsplashPhotoFactory
+import com.rafal.unsplashwallpapers.model.UnsplashUserFactory
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 
-
-class PhotosPagingSourceTest {
-    private val mockPhotos = listOf(
-        UnsplashPhotoFactory.createUnsplashPhoto("Mike"),
-        UnsplashPhotoFactory.createUnsplashPhoto("Jake"),
-        UnsplashPhotoFactory.createUnsplashPhoto("Mike123")
+class UsersPagingSourceTest {
+    private val mockUsers = listOf(
+        UnsplashUserFactory.createUnsplashUser("Mike"),
+        UnsplashUserFactory.createUnsplashUser("Jake"),
+        UnsplashUserFactory.createUnsplashUser("Mike123"),
+        UnsplashUserFactory.createUnsplashUser("Joe"),
+        UnsplashUserFactory.createUnsplashUser("Thomas"),
     )
 
     private val fakeApi = FakeUnsplashApi().apply {
-        mockPhotos.forEach { photo -> this.addPhoto(photo) }
+        mockUsers.forEach { user -> this.addUser(user) }
     }
 
     @Test
-    fun `Find photos returns page on successful load`() = runBlockingTest {
-        val pagingSource = PhotosPagingSource(fakeApi, "Mike", "sort")
+    fun `Find users returns Page on successful load`() = runBlockingTest {
+        val pagingSource = UsersPagingSource(fakeApi, "Mike")
 
         val result = pagingSource.load(
             PagingSource.LoadParams.Refresh(
@@ -32,7 +33,7 @@ class PhotosPagingSourceTest {
         )
 
         val expected = PagingSource.LoadResult.Page(
-            data = listOf(mockPhotos[0], mockPhotos[2]),
+            data = listOf(mockUsers[0], mockUsers[2]),
             prevKey = null,
             nextKey = 2
         )
@@ -41,8 +42,8 @@ class PhotosPagingSourceTest {
     }
 
     @Test
-    fun `Find photos returns empty page when no photos found`() = runBlockingTest {
-        val pagingSource = UsersPagingSource(fakeApi, "InvalidPhotoID")
+    fun `Find users returns empty page when no users found`() = runBlockingTest {
+        val pagingSource = UsersPagingSource(fakeApi, "InvalidUsername")
 
         val result = pagingSource.load(
             PagingSource.LoadParams.Refresh(

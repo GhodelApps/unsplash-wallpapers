@@ -6,7 +6,7 @@ class UnsplashUserFactory {
             return UnsplashUser(
                 id = "id_$user",
                 name = "name_$user",
-                username = "username_$user",
+                username = "$user",
                 profile_image = UnsplashUser.ProfileImage(
                     small = "small_$user",
                     medium = "medium_$user",
