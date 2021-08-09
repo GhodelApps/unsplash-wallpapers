@@ -12,9 +12,9 @@ class PhotosPagingSourceTest {
     private val photoFactory = UnsplashPhotoFactory()
 
     private val mockPhotos = listOf(
-        photoFactory.createUnsplashPhoto(),
-        photoFactory.createUnsplashPhoto(),
-        photoFactory.createUnsplashPhoto()
+        photoFactory.createUnsplashPhoto("Mike"),
+        photoFactory.createUnsplashPhoto("Jake"),
+        photoFactory.createUnsplashPhoto("Mike123")
     )
 
     private val mockApi = FakeUnsplashApi().apply {
@@ -23,18 +23,18 @@ class PhotosPagingSourceTest {
 
     @Test
     fun `load returns page when on successful load`() = runBlockingTest {
-        val pagingSource = PhotosPagingSource(mockApi, "id", "sort")
+        val pagingSource = PhotosPagingSource(mockApi, "Mike", "sort")
 
         val result = pagingSource.load(
             PagingSource.LoadParams.Refresh(
                 key = null,
-                loadSize = 3,
+                loadSize = 2,
                 placeholdersEnabled = false
             )
         )
 
         val expected = PagingSource.LoadResult.Page(
-            data = listOf(mockPhotos[0], mockPhotos[1], mockPhotos[2]),
+            data = listOf(mockPhotos[0], mockPhotos[2]),
             prevKey = null,
             nextKey = 2
         )

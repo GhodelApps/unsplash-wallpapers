@@ -4,9 +4,19 @@ import retrofit2.Response
 
 class FakeUnsplashApi : UnsplashApi {
     private val photos = mutableListOf<UnsplashSearchPhoto>()
+    private val users = mutableListOf<UnsplashUser>()
+    private val collections = mutableListOf<UnsplashCollection>()
 
     fun addPhoto(photo: UnsplashSearchPhoto) {
         photos.add(photo)
+    }
+
+    fun addUser(user: UnsplashUser) {
+        users.add(user)
+    }
+
+    fun addCollection(collection: UnsplashCollection) {
+        collections.add(collection)
     }
 
     override suspend fun getAllPhotos(
@@ -27,14 +37,18 @@ class FakeUnsplashApi : UnsplashApi {
     }
 
     override suspend fun searchUsers(query: String, page: Int): Response<UnsplashUserResults> {
-        TODO("Not yet implemented")
+        return Response.success(UnsplashUserResults(results = users.filter {
+            it.id.contains(query)
+        }))
     }
 
     override suspend fun searchCollections(
         query: String,
         page: Int
     ): Response<UnsplashCollectionsResults> {
-        TODO("Not yet implemented")
+        return Response.success(UnsplashCollectionsResults(results = collections.filter {
+            it.id.contains(query)
+        }))
     }
 
     override suspend fun getPhoto(id: String): Response<UnsplashPhoto> {
@@ -42,7 +56,9 @@ class FakeUnsplashApi : UnsplashApi {
     }
 
     override suspend fun getUser(username: String): Response<UnsplashUser> {
-        TODO("Not yet implemented")
+        return Response.success(users.find {
+            it.username == username
+        })
     }
 
     override suspend fun getUserPhotos(
