@@ -14,7 +14,6 @@ import javax.inject.Inject
 class AllPhotosRepository @Inject constructor(
     private val api: UnsplashApi,
     private val db: AppDatabase
-
 ) {
     @ExperimentalPagingApi
     fun getAllPhotos(orderBy: String): Flow<PagingData<UnsplashSearchPhoto>> {
