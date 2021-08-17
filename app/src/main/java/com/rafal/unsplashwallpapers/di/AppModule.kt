@@ -60,5 +60,4 @@ class AppModule {
             AppDatabase::class.java, "unsplash_database"
         ).build()
     }
-
 }
